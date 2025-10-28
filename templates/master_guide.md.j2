@@ -1,0 +1,141 @@
+# {{ title }}
+
+> **Last Updated:** {{ generated_date }}
+
+{{ description }}
+
+---
+
+## Table of Contents
+
+{% if has_build_info %}
+- [Building from Source](#building-from-source)
+{% endif %}
+{% if sections %}
+{% for section in sections %}
+- [{{ section.title }}](#{{ section.title | lower | replace(' ', '-') }})
+{% endfor %}
+{% else %}
+- [Setup Steps](#setup-steps)
+{% endif %}
+{% if has_new_features %}
+- [New Features](#new-features)
+{% endif %}
+{% if has_changed_features %}
+- [Changed Features](#changed-features)
+{% endif %}
+- [Troubleshooting](#troubleshooting)
+
+---
+
+{% if has_build_info %}
+## Building from Source
+
+{% if source_url %}
+**Source Code:** {{ source_url }}
+{% endif %}
+
+{% if build_instructions %}
+{{ build_instructions }}
+{% endif %}
+
+---
+{% endif %}
+
+{% if sections %}
+{# Sectioned content - render each section's content #}
+{% for section in sections %}
+{{ section.content }}
+
+{% endfor %}
+{% else %}
+{# Non-sectioned content - render steps directly #}
+## Setup Steps
+
+This guide will walk you through {{ total_steps }} steps to set up {{ wallet_name }}.
+
+{% for step in steps %}
+### {{ step.name }}
+
+{% if step.description %}
+{% set lines = step.description.strip().split('\n') %}
+{% set non_empty_lines = [] %}
+{% for line in lines %}
+{% if line.strip() %}
+{% set _ = non_empty_lines.append(line.strip()) %}
+{% endif %}
+{% endfor %}
+{% if non_empty_lines | length > 1 %}
+{% for line in non_empty_lines %}
+- {{ line }}
+{% endfor %}
+{% else %}
+{{ step.description.strip() }}
+{% endif %}
+{% endif %}
+
+{% if step.screenshot_relative %}
+<img src="{{ step.screenshot_relative }}" alt="{{ step.name }}" style="max-height: {{ screenshot_max_height }}px;">
+{% endif %}
+
+{% if step.flags %}
+{% for flag in step.flags %}
+{% if flag == "NEW" %}
+> 🆕 **New Feature:** This is a newly added feature in the latest version.
+{% elif flag == "CHANGED" %}
+> ⚠️ **Changed:** This step has been modified from previous versions.
+{% elif flag == "DEPRECATED" %}
+> ⚠️ **Deprecated:** This feature may be removed in future versions.
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if step.notes %}
+**Note:** {{ step.notes }}
+{% endif %}
+
+---
+
+{% endfor %}
+{% endif %}
+
+{% if has_new_features %}
+## New Features
+
+The following features are new in this version:
+
+{% for feature in new_features %}
+- **{{ feature.name }}**
+{% endfor %}
+
+---
+{% endif %}
+
+{% if has_changed_features %}
+## Changed Features
+
+The following steps have been updated:
+
+{% for feature in changed_features %}
+- **{{ feature.name }}**
+{% endfor %}
+
+---
+{% endif %}
+
+## Troubleshooting
+
+{% if troubleshooting %}
+{{ troubleshooting }}
+{% endif %}
+
+### Need More Help?
+
+{% if source_url %}
+- Report an issue in the project repository: {{ source_url }}
+{% endif %}
+- Join Silent Payments [discord](https://discord.gg/UFF2u6hxBf) and ask for help
+
+---
+
+*This guide is maintained automatically. If you notice any discrepancies, please report them.*

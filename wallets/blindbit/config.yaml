@@ -2,26 +2,302 @@ wallet:
   name: "BlindBit Desktop"
   type: "desktop"
   platforms:
-    - "macOS"
-  app_path:
-    macOS: "/Users/ron/src/blindbit-desktop/blindbit-desktop"
+    - "macos"
+  # app_path:
+    #macos: "/Users/ron/src/blindbit-desktop/blindbit-desktop"
 
 automation:
-  startup_wait: 3
+  startup_wait: 5
   screenshot_delay: 1.0
   implicit_wait: 10
 
 documentation:
-  title: "BlindBit Desktop Setup Guide"
-  description: "Step-by-step guide to setting up BlindBit Desktop wallet"
+  title: "BlindBit Desktop User Guide"
+  description: "Step-by-step guide to setting up and using BlindBit Desktop wallet"
   output_format: "markdown"
   embed_images: true
+  screenshot_max_height: 500
+  sections:
+    setup:
+      title: Initial Wallet Setup
+      description: This workflow demonstrates how to recover a silent payments wallet from seed phrase
+      crop: [435, 250, 1000, 800]
+      coordinates:
+        activate_window: [850, 550]
+        create_wallet: [846, 675]
+        import_existing: [903, 612]
+        confirm_seed: [778, 596]
+        input_seed: [781, 478]
+        import_wallet: [772, 527]
+        select_mainnet: [670, 570]
+        continue: [771, 686]
+        select_birthheight: [712, 487]
+        select_oracleaddress: [816, 563]
+        save_continue: [749, 813]
+      steps:
+        - name: Activate window
+          description:
+          action: click
+          target: activate_window
+          omit_from_output: true
+
+        - name: Import Existing Wallet
+          description: Select "Import Existing Wallet" to restore wallet from seed phrase
+          action: click
+          target: import_existing
+          screenshot: true
+
+        - name: Select Seed Phrase
+          description: ""
+          action: click
+          target: input_seed
+          omit_from_output: true
+
+        - name: Enter Seed Phrase
+          description: ""
+          action: type
+          value: abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art
+          omit_from_output: true
+
+        - name: Finalize Import Wallet
+          description: |
+            Enter seed phrase
+            Select "Import Wallet"
+          notes: 12 or 24 word mnemonic supported
+          action: click
+          target: import_wallet
+          screenshot: true
+
+        - name: Select Network
+          description:
+          action: click
+          target: select_mainnet
+          omit_from_output: true
+
+        - name: Make Network Selection
+          description: |
+            Choose "mainnet" for production use
+            Select "Continue" to confirm network
+          action: click
+          target: continue
+          screenshot: true
+
+        - name: Select wallet birthdate
+          description:
+          action: click
+          clicks: 2
+          target: select_birthheight
+          omit_from_output: true
+
+        - name: Update birth height
+          description:
+          action: type
+          value: "920000"
+          omit_from_output: true
+
+        - name: Finalize Wallet Setup
+          description: |
+            Choose a "block height" to capture any previous silent payment transactions for this wallet
+            Select "Save & Continue" to complete setup and start scanning for transactions
+          notes: |
+            wallet.dat is stored in ~/.blindbit-desktop by default
+
+            **Warning:** key material in this file is not encrypted at this time
+          action: click
+          target: save_continue
+          screenshot: true
+        
+        - name: Scanning
+          description: Monitor "Scanning Status" on this view
+          action: screenshot
+          screenshot: true
+
+    overview:
+      title: "Using BlindBit Desktop"
+      description: "Overview of wallet and navigation"
+      crop: [371, 255, 1085, 800]
+      coordinates:
+        scanning_tab: [444, 315]
+        utxos_tab: [535, 315]
+        send_tab: [600, 315]
+        receive_tab: [668, 315]
+        transactions_tab: [740, 315]
+        settings: [845, 315]
+      steps:
+        - name: Activate window
+          description:
+          action: click
+          target: scanning_tab
+          omit_from_output: true
+
+        - name: Scanning
+          description: View blockchain scanning progress
+          notes: |
+            "Current Scan Height": \# will match "Chain Tip" when sync is complete
+
+            **Rescan Button**: only use this button after changing "birth height" in settings or testing
+          action: click
+          target: utxos_tab
+          screenshot: true
+
+        - name: UTXOs
+          description: View wallet balance and unspent transaction outputs
+          notes: |
+            Toggle the "Show only unspent UTXOs" to view spent too
+          action: click
+          target: send_tab
+          screenshot: true
+
+        - name: Send
+          description: Send bitcoin to other wallets
+          notes: |
+            Fee Rate must be greater than or equal to 1 sat/vB
+          action: click
+          target: receive_tab
+          screenshot: true
+
+        - name: Receive
+          description: Generate addresses to receive payments
+          action: click
+          target: transactions_tab
+          screenshot: true
+
+        - name: Transactions
+          description: View transaction history
+          notes: |
+            received transactions will only appear once the transaction is confirmed in a block
+
+            spending transactions will appear immediately
+            
+            fees will only appear if spent from this wallet - not available after recovery
+          action: click
+          target: settings
+          screenshot: true
+
+        - name: Settings
+          description: Modify wallet settings and configuration
+          notes: restart may be required after applying new settings
+          action: click
+          target: scanning_tab
+          screenshot: true
+
+    sending:
+      title: Sending Transactions
+      description: Highlight the basics of sending a payment from blindbit-desktop
+      crop: [371, 255, 1085, 800]
+      coordinates:
+        scanning_tab: [444, 315]
+        utxos_tab: [513, 315]
+        send_tab: [569, 315]
+        send_transaction: [511, 594]
+        confirm_send: [981, 778]
+        transactions_tab: [710, 315]
+        settings: [815, 315]
+        ok: [901, 690]
+        close_preview: [981, 825]
+      steps:
+        - name: Activate window
+          description:
+          action: click
+          clicks: 2
+          target: send_tab
+          omit_from_output: true
+
+        - name: Enter Recipient Information
+          description: | 
+            Enter a recipient address, the amount to send, fee rate
+            Select "Send Transaction" to view details
+          notes: |
+            Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time
+
+            Fee rate will be increased to spend remaining UTXO to avoid dust
+          action: click
+          target: send_transaction
+          screenshot: true
+        
+        - name: Preview Transaction
+          description: Select "Confirm & Broadcast" to send the transaction
+          notes: Select "Close" to return to the previous view and make changes
+          action: click
+          target: confirm_send
+          screenshot: true
+
+        - name: Transaction Confirmation
+          description: Click "OK" to close broadcast response
+          action: click
+          target: ok
+          screenshot: true
+
+        - name: Close Preview
+          description:
+          action: click
+          target: close_preview
+          omit_from_output: true
+
+        - name: Pending Transactions
+          description: Unconfirmed transactions will have a "Pending" status
+          notes: Select a "transaction" to view details
+          action: click
+          target: transactions_tab
+          screenshot: true
+
+        - name: Spent UTXOs
+          description: While a transaction is being confirmed the whole UTXO is treated as spent
+          notes: Toggle "unspent" to view unconfirmed_status
+          action: click
+          target: utxos_tab
+          screenshot: true
+
+    receiving:
+      title: Receiving Transactions
+      description: Overview of receiving funds to blindbit-desktop
+      crop: [371, 255, 1085, 800]
+      coordinates:
+        scanning_tab: [444, 315]
+        utxos_tab: [513, 315]
+        send_tab: [569, 315]
+        receive_tab: [638, 315]
+        transactions_tab: [710, 315]
+        settings: [815, 315]
+      steps:
+        - name: UTXOs
+          description: UTXOs will appear here automatically after confirmation
+          action: click
+          clicks: 2
+          target: utxos_tab
+          screenshot: true
+
+        - name: Transactions
+          description: | 
+            History of wallet transactions
+            Select a "transaction" to view details
+          notes: |
+            received transactions will appear here automatically when confirmed
+          action: click
+          target: transactions_tab
+          screenshot: true
+  troubleshooting: |
+    ### Screenshots Don't Match
+    - Verify the wallet was compiled from the correct branch "rework"
+    
+    ### Sync Issues
+    - Verify your internet connection
+    - Check firewall settings
+    - Allow sufficient time for blockchain synchronization
 
 build:
-  source_url: "https://github.com/blindbit/blindbit-desktop"
+  source_url: "https://github.com/setavenger/blindbit-desktop"
   build_instructions: |
-    # Building from source
-    
-    1. Clone the repository
-    2. Install Go dependencies
-    3. Run build command
+    Instructions for compiling BlindBit Desktop from [source](https://github.com/setavenger/blindbit-desktop?tab=readme-ov-file#prerequisites)
+    Quick Start
+    1. Verify Go version 1.24 or later
+    ```
+    go version
+    ```
+    2. Compile blindbit-desktop
+    ```
+    cd blindbit-desktop
+    git checkout -B rework origin/rework
+    go build -o blindbit-desktop ./cmd/blindbit-desktop
+    ./blindbit-desktop
+    ```

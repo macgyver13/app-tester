@@ -1,0 +1,138 @@
+wallet:
+  name: "Example Wallet"
+  type: "desktop"
+  platforms: ["macOS", "Linux", "Windows"]
+  app_path:
+    macos: "/Applications/ExampleWallet.app"
+    linux: "/usr/bin/example-wallet"
+    windows: "C:\\Program Files\\ExampleWallet\\example-wallet.exe"
+
+automation:
+  startup_wait: 3  # seconds to wait after app launch
+  screenshot_delay: 1.0  # seconds to wait before screenshot
+  implicit_wait: 10  # seconds to wait for elements
+
+documentation:
+  title: "Example Wallet User Guide"
+  description: "Complete guide to setting up Example Bitcoin wallet"
+  output_format: "markdown"
+  embed_images: true
+  screenshot_max_height: 600  # Max height for screenshots in markdown (pixels)
+  troubleshooting: |
+    ### Common Issues
+
+    **Wallet won't start:**
+    - Check that you have the required dependencies installed
+    - Verify the application path is correct
+
+    **Screenshots don't match:**
+    - Ensure you're using the correct version
+    - Check that you compiled from the correct branch
+
+  # NEW: Define sections with contextual syntax
+  # Each section can have:
+  # - title: Display title for the section
+  # - description: Section description
+  # - crop: Default crop region [x, y, width, height] for all steps (optional)
+  # - coordinates: Named coordinate definitions for easy reference
+  # - steps: List of automation steps with contextual references
+  sections:
+    build:
+      title: "Building from Source"
+      description: |
+        Instructions for compiling Example Wallet from [source](https://github.com/example/wallet)
+      # No steps for build section (informational only)
+      steps: []
+
+    setup:
+      title: "Initial Wallet Setup"
+      description: "Create and configure your wallet for first use"
+      # Optional: Define a default crop region for all steps in this section
+      # crop: [100, 100, 800, 600]
+
+      # Define coordinates once, reference by name in steps
+      coordinates:
+        create_wallet_button: [400, 300]
+        wallet_name_field: [400, 350]
+        password_field: [400, 400]
+        confirm_button: [400, 450]
+        finish_button: [400, 500]
+
+      # Define steps with contextual references
+      steps:
+        - name: "Launch Application"
+          description: "Open the wallet application from your Applications folder"
+          action: "launch"
+          screenshot: true
+
+        - name: "Create New Wallet"
+          description: "Click the 'Create New Wallet' button to begin setup"
+          action: "click"
+          target: "create_wallet_button"  # References coordinates.create_wallet_button
+          screenshot: true
+          flags: ["NEW"]  # Optional: Mark as new feature
+
+        - name: "Enter Wallet Name"
+          description: "Type a descriptive name for your wallet"
+          action: "type"
+          target: "wallet_name_field"
+          value: "My Bitcoin Wallet"
+          screenshot: true
+
+        - name: "Set Wallet Password"
+          description: "Create a strong password to protect your wallet"
+          action: "type"
+          target: "password_field"
+          value: "SecurePassword123!"
+          screenshot: true
+          notes: "Remember to store your password securely!"
+
+        - name: "Confirm Password"
+          description: "Re-enter your password to confirm"
+          action: "click"
+          target: "confirm_button"
+          screenshot: true
+
+    usage:
+      title: "Using Your Wallet"
+      description: "Navigate and use wallet features"
+      # crop: [100, 100, 800, 600]
+
+      coordinates:
+        receive_button: [200, 300]
+        send_button: [400, 300]
+        settings_button: [600, 300]
+
+      steps:
+        - name: "Wallet Dashboard"
+          description: "Your wallet's main screen showing balance and options"
+          action: "screenshot"
+          screenshot: true
+
+        - name: "Receive Bitcoin"
+          description: "Generate addresses to receive payments"
+          action: "click"
+          target: "receive_button"
+          screenshot: true
+
+        - name: "Send Bitcoin"
+          description: "Send bitcoin to other addresses"
+          action: "click"
+          target: "send_button"
+          screenshot: true
+
+build:
+  source_url: "https://github.com/example/wallet"
+  build_instructions: |
+    ## Prerequisites
+    - Git
+    - Python 3.8+
+    - Node.js 16+
+
+    ## Build Steps
+    ```bash
+    git clone https://github.com/example/wallet
+    cd wallet
+    npm install
+    npm run build
+    ```

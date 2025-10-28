@@ -1,0 +1,51 @@
+ ***
+## {{ section_title }}
+
+{% if section_description %}
+{{ section_description }}
+{% endif %}
+
+{% for step in steps %}
+#### {{ step.name }}
+
+{% if step.description %}
+{% set lines = step.description.strip().split('\n') %}
+{% set non_empty_lines = [] %}
+{% for line in lines %}
+{% if line.strip() %}
+{% set _ = non_empty_lines.append(line.strip()) %}
+{% endif %}
+{% endfor %}
+{% if non_empty_lines | length > 1 %}
+{% for line in non_empty_lines %}
+- {{ line }}
+{% endfor %}
+{% else %}
+{{ step.description.strip() }}
+{% endif %}
+{% endif %}
+
+{% if step.screenshot_relative %}
+<img src="../{{ step.screenshot_relative }}" alt="{{ step.name }}" style="max-height: {{ screenshot_max_height }}px;">
+{% endif %}
+
+{% if step.flags %}
+{% for flag in step.flags %}
+{% if flag == "NEW" %}
+> 🆕 **New Feature:** This is a newly added feature in the latest version.
+{% elif flag == "CHANGED" %}
+> ⚠️ **Changed:** This step has been modified from previous versions.
+{% elif flag == "DEPRECATED" %}
+> ⚠️ **Deprecated:** This feature may be removed in future versions.
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if step.notes %}
+**Note:**
+> {{ step.notes | replace('\n', '\n> ') }}
+{% endif %}
+
+---
+
+{% endfor %}

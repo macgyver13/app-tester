@@ -49,6 +49,7 @@ output/staging
 # Temporary files
 *.tmp
 .cache/
+needs_review/
 
 # Test files
 .pytest_cache/

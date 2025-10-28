@@ -1,0 +1,389 @@
+{
+  "title": "BlindBit Desktop User Guide",
+  "wallet_name": "BlindBit Desktop",
+  "description": "Step-by-step guide to setting up and using BlindBit Desktop wallet",
+  "generated_date": "2025-10-28",
+  "steps": [
+    {
+      "number": 2,
+      "name": "Import Existing Wallet",
+      "description": "Select \"Import Existing Wallet\" to restore wallet from seed phrase",
+      "section": "setup",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/setup_import_existing_wallet.png",
+      "screenshot_relative": "screenshots/setup_import_existing_wallet.png"
+    },
+    {
+      "number": 5,
+      "name": "Finalize Import Wallet",
+      "description": "Enter seed phrase\nSelect \"Import Wallet\"\n",
+      "section": "setup",
+      "flags": [],
+      "notes": "12 or 24 word mnemonic supported",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/setup_finalize_import_wallet.png",
+      "screenshot_relative": "screenshots/setup_finalize_import_wallet.png"
+    },
+    {
+      "number": 7,
+      "name": "Make Network Selection",
+      "description": "Choose \"mainnet\" for production use\nSelect \"Continue\" to confirm network\n",
+      "section": "setup",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/setup_make_network_selection.png",
+      "screenshot_relative": "screenshots/setup_make_network_selection.png"
+    },
+    {
+      "number": 10,
+      "name": "Finalize Wallet Setup",
+      "description": "Choose a \"block height\" to capture any previous silent payment transactions for this wallet\nSelect \"Save & Continue\" to complete setup and start scanning for transactions\n",
+      "section": "setup",
+      "flags": [],
+      "notes": "wallet.dat is stored in ~/.blindbit-desktop by default\n\n**Warning:** key material in this file is not encrypted at this time\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/setup_finalize_wallet_setup.png",
+      "screenshot_relative": "screenshots/setup_finalize_wallet_setup.png"
+    },
+    {
+      "number": 11,
+      "name": "Scanning",
+      "description": "Monitor \"Scanning Status\" on this view",
+      "section": "setup",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/setup_scanning.png",
+      "screenshot_relative": "screenshots/setup_scanning.png"
+    },
+    {
+      "number": 13,
+      "name": "Scanning",
+      "description": "View blockchain scanning progress",
+      "section": "overview",
+      "flags": [],
+      "notes": "\"Current Scan Height\": \\# will match \"Chain Tip\" when sync is complete\n\n**Rescan Button**: only use this button after changing \"birth height\" in settings or testing\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_scanning.png",
+      "screenshot_relative": "screenshots/overview_scanning.png"
+    },
+    {
+      "number": 14,
+      "name": "UTXOs",
+      "description": "View wallet balance and unspent transaction outputs",
+      "section": "overview",
+      "flags": [],
+      "notes": "Toggle the \"Show only unspent UTXOs\" to view spent too\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_utxos.png",
+      "screenshot_relative": "screenshots/overview_utxos.png"
+    },
+    {
+      "number": 15,
+      "name": "Send",
+      "description": "Send bitcoin to other wallets",
+      "section": "overview",
+      "flags": [],
+      "notes": "Fee Rate must be greater than or equal to 1 sat/vB\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_send.png",
+      "screenshot_relative": "screenshots/overview_send.png"
+    },
+    {
+      "number": 16,
+      "name": "Receive",
+      "description": "Generate addresses to receive payments",
+      "section": "overview",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_receive.png",
+      "screenshot_relative": "screenshots/overview_receive.png"
+    },
+    {
+      "number": 17,
+      "name": "Transactions",
+      "description": "View transaction history",
+      "section": "overview",
+      "flags": [],
+      "notes": "received transactions will only appear once the transaction is confirmed in a block\n\nspending transactions will appear immediately\n\nfees will only appear if spent from this wallet - not available after recovery\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_transactions.png",
+      "screenshot_relative": "screenshots/overview_transactions.png"
+    },
+    {
+      "number": 18,
+      "name": "Settings",
+      "description": "Modify wallet settings and configuration",
+      "section": "overview",
+      "flags": [],
+      "notes": "restart may be required after applying new settings",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/overview_settings.png",
+      "screenshot_relative": "screenshots/overview_settings.png"
+    },
+    {
+      "number": 20,
+      "name": "Enter Recipient Information",
+      "description": "Enter a recipient address, the amount to send, fee rate\nSelect \"Send Transaction\" to view details\n",
+      "section": "sending",
+      "flags": [],
+      "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/sending_enter_recipient_information.png",
+      "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
+    },
+    {
+      "number": 21,
+      "name": "Preview Transaction",
+      "description": "Select \"Confirm & Broadcast\" to send the transaction",
+      "section": "sending",
+      "flags": [],
+      "notes": "Select \"Close\" to return to the previous view and make changes",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/sending_preview_transaction.png",
+      "screenshot_relative": "screenshots/sending_preview_transaction.png"
+    },
+    {
+      "number": 22,
+      "name": "Transaction Confirmation",
+      "description": "Click \"OK\" to close broadcast response",
+      "section": "sending",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/sending_transaction_confirmation.png",
+      "screenshot_relative": "screenshots/sending_transaction_confirmation.png"
+    },
+    {
+      "number": 24,
+      "name": "Pending Transactions",
+      "description": "Unconfirmed transactions will have a \"Pending\" status",
+      "section": "sending",
+      "flags": [],
+      "notes": "Select a \"transaction\" to view details",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/sending_pending_transactions.png",
+      "screenshot_relative": "screenshots/sending_pending_transactions.png"
+    },
+    {
+      "number": 25,
+      "name": "Spent UTXOs",
+      "description": "While a transaction is being confirmed the whole UTXO is treated as spent",
+      "section": "sending",
+      "flags": [],
+      "notes": "Toggle \"unspent\" to view unconfirmed_status",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/sending_spent_utxos.png",
+      "screenshot_relative": "screenshots/sending_spent_utxos.png"
+    },
+    {
+      "number": 26,
+      "name": "UTXOs",
+      "description": "UTXOs will appear here automatically after confirmation",
+      "section": "receiving",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/receiving_utxos.png",
+      "screenshot_relative": "screenshots/receiving_utxos.png"
+    },
+    {
+      "number": 27,
+      "name": "Transactions",
+      "description": "History of wallet transactions\nSelect a \"transaction\" to view details\n",
+      "section": "receiving",
+      "flags": [],
+      "notes": "received transactions will appear here automatically when confirmed\n",
+      "screenshot": "output/staging/blindbit_desktop/screenshots/receiving_transactions.png",
+      "screenshot_relative": "screenshots/receiving_transactions.png"
+    }
+  ],
+  "sections": {
+    "setup": [
+      {
+        "number": 2,
+        "name": "Import Existing Wallet",
+        "description": "Select \"Import Existing Wallet\" to restore wallet from seed phrase",
+        "section": "setup",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/setup_import_existing_wallet.png",
+        "screenshot_relative": "screenshots/setup_import_existing_wallet.png"
+      },
+      {
+        "number": 5,
+        "name": "Finalize Import Wallet",
+        "description": "Enter seed phrase\nSelect \"Import Wallet\"\n",
+        "section": "setup",
+        "flags": [],
+        "notes": "12 or 24 word mnemonic supported",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/setup_finalize_import_wallet.png",
+        "screenshot_relative": "screenshots/setup_finalize_import_wallet.png"
+      },
+      {
+        "number": 7,
+        "name": "Make Network Selection",
+        "description": "Choose \"mainnet\" for production use\nSelect \"Continue\" to confirm network\n",
+        "section": "setup",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/setup_make_network_selection.png",
+        "screenshot_relative": "screenshots/setup_make_network_selection.png"
+      },
+      {
+        "number": 10,
+        "name": "Finalize Wallet Setup",
+        "description": "Choose a \"block height\" to capture any previous silent payment transactions for this wallet\nSelect \"Save & Continue\" to complete setup and start scanning for transactions\n",
+        "section": "setup",
+        "flags": [],
+        "notes": "wallet.dat is stored in ~/.blindbit-desktop by default\n\n**Warning:** key material in this file is not encrypted at this time\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/setup_finalize_wallet_setup.png",
+        "screenshot_relative": "screenshots/setup_finalize_wallet_setup.png"
+      },
+      {
+        "number": 11,
+        "name": "Scanning",
+        "description": "Monitor \"Scanning Status\" on this view",
+        "section": "setup",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/setup_scanning.png",
+        "screenshot_relative": "screenshots/setup_scanning.png"
+      }
+    ],
+    "overview": [
+      {
+        "number": 13,
+        "name": "Scanning",
+        "description": "View blockchain scanning progress",
+        "section": "overview",
+        "flags": [],
+        "notes": "\"Current Scan Height\": \\# will match \"Chain Tip\" when sync is complete\n\n**Rescan Button**: only use this button after changing \"birth height\" in settings or testing\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_scanning.png",
+        "screenshot_relative": "screenshots/overview_scanning.png"
+      },
+      {
+        "number": 14,
+        "name": "UTXOs",
+        "description": "View wallet balance and unspent transaction outputs",
+        "section": "overview",
+        "flags": [],
+        "notes": "Toggle the \"Show only unspent UTXOs\" to view spent too\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_utxos.png",
+        "screenshot_relative": "screenshots/overview_utxos.png"
+      },
+      {
+        "number": 15,
+        "name": "Send",
+        "description": "Send bitcoin to other wallets",
+        "section": "overview",
+        "flags": [],
+        "notes": "Fee Rate must be greater than or equal to 1 sat/vB\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_send.png",
+        "screenshot_relative": "screenshots/overview_send.png"
+      },
+      {
+        "number": 16,
+        "name": "Receive",
+        "description": "Generate addresses to receive payments",
+        "section": "overview",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_receive.png",
+        "screenshot_relative": "screenshots/overview_receive.png"
+      },
+      {
+        "number": 17,
+        "name": "Transactions",
+        "description": "View transaction history",
+        "section": "overview",
+        "flags": [],
+        "notes": "received transactions will only appear once the transaction is confirmed in a block\n\nspending transactions will appear immediately\n\nfees will only appear if spent from this wallet - not available after recovery\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_transactions.png",
+        "screenshot_relative": "screenshots/overview_transactions.png"
+      },
+      {
+        "number": 18,
+        "name": "Settings",
+        "description": "Modify wallet settings and configuration",
+        "section": "overview",
+        "flags": [],
+        "notes": "restart may be required after applying new settings",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/overview_settings.png",
+        "screenshot_relative": "screenshots/overview_settings.png"
+      }
+    ],
+    "sending": [
+      {
+        "number": 20,
+        "name": "Enter Recipient Information",
+        "description": "Enter a recipient address, the amount to send, fee rate\nSelect \"Send Transaction\" to view details\n",
+        "section": "sending",
+        "flags": [],
+        "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/sending_enter_recipient_information.png",
+        "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
+      },
+      {
+        "number": 21,
+        "name": "Preview Transaction",
+        "description": "Select \"Confirm & Broadcast\" to send the transaction",
+        "section": "sending",
+        "flags": [],
+        "notes": "Select \"Close\" to return to the previous view and make changes",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/sending_preview_transaction.png",
+        "screenshot_relative": "screenshots/sending_preview_transaction.png"
+      },
+      {
+        "number": 22,
+        "name": "Transaction Confirmation",
+        "description": "Click \"OK\" to close broadcast response",
+        "section": "sending",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/sending_transaction_confirmation.png",
+        "screenshot_relative": "screenshots/sending_transaction_confirmation.png"
+      },
+      {
+        "number": 24,
+        "name": "Pending Transactions",
+        "description": "Unconfirmed transactions will have a \"Pending\" status",
+        "section": "sending",
+        "flags": [],
+        "notes": "Select a \"transaction\" to view details",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/sending_pending_transactions.png",
+        "screenshot_relative": "screenshots/sending_pending_transactions.png"
+      },
+      {
+        "number": 25,
+        "name": "Spent UTXOs",
+        "description": "While a transaction is being confirmed the whole UTXO is treated as spent",
+        "section": "sending",
+        "flags": [],
+        "notes": "Toggle \"unspent\" to view unconfirmed_status",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/sending_spent_utxos.png",
+        "screenshot_relative": "screenshots/sending_spent_utxos.png"
+      }
+    ],
+    "receiving": [
+      {
+        "number": 26,
+        "name": "UTXOs",
+        "description": "UTXOs will appear here automatically after confirmation",
+        "section": "receiving",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/receiving_utxos.png",
+        "screenshot_relative": "screenshots/receiving_utxos.png"
+      },
+      {
+        "number": 27,
+        "name": "Transactions",
+        "description": "History of wallet transactions\nSelect a \"transaction\" to view details\n",
+        "section": "receiving",
+        "flags": [],
+        "notes": "received transactions will appear here automatically when confirmed\n",
+        "screenshot": "output/staging/blindbit_desktop/screenshots/receiving_transactions.png",
+        "screenshot_relative": "screenshots/receiving_transactions.png"
+      }
+    ]
+  },
+  "has_sections": true,
+  "total_steps": 18,
+  "new_features": [],
+  "changed_features": [],
+  "has_new_features": false,
+  "has_changed_features": false,
+  "source_url": "https://github.com/setavenger/blindbit-desktop",
+  "build_instructions": "Instructions for compiling BlindBit Desktop from [source](https://github.com/setavenger/blindbit-desktop?tab=readme-ov-file#prerequisites)\nQuick Start\n1. Verify Go version 1.24 or later\n```\ngo version\n```\n2. Compile blindbit-desktop\n```\ncd blindbit-desktop\ngit checkout -B rework origin/rework\ngo build -o blindbit-desktop ./cmd/blindbit-desktop\n./blindbit-desktop\n```",
+  "has_build_info": true,
+  "screenshot_max_height": 500,
+  "troubleshooting": "### Screenshots Don't Match\n- Verify the wallet was compiled from the correct branch \"rework\"\n\n### Sync Issues\n- Verify your internet connection\n- Check firewall settings\n- Allow sufficient time for blockchain synchronization\n"
+}
