@@ -1,0 +1,29 @@
+# Core automation
+Appium-Python-Client==3.1.0
+selenium==4.15.2
+pyautogui  # Coordinate-based automation for apps without accessibility APIs
+atomacos  # macOS accessibility API automation
+
+# Image processing and annotation
+Pillow
+opencv-python
+numpy<2.0.0
+
+# Documentation generation
+Jinja2
+markdown2
+PyYAML
+
+# Utilities
+python-dotenv==1.0.0
+colorama==0.4.6
+click==8.1.7
+
+# Optional: for advanced element detection
+# pytesseract==0.3.10  # OCR for text detection
+
+# Development dependencies
+pytest==7.4.3
+pytest-cov==4.1.0
+black==23.11.0
+flake8==6.1.0

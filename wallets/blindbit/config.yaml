@@ -1,0 +1,27 @@
+wallet:
+  name: "BlindBit Desktop"
+  type: "desktop"
+  platforms:
+    - "macOS"
+  app_path:
+    macOS: "/Users/ron/src/blindbit-desktop/blindbit-desktop"
+
+automation:
+  startup_wait: 3
+  screenshot_delay: 1.0
+  implicit_wait: 10
+
+documentation:
+  title: "BlindBit Desktop Setup Guide"
+  description: "Step-by-step guide to setting up BlindBit Desktop wallet"
+  output_format: "markdown"
+  embed_images: true
+
+build:
+  source_url: "https://github.com/blindbit/blindbit-desktop"
+  build_instructions: |
+    # Building from source
+    
+    1. Clone the repository
+    2. Install Go dependencies
+    3. Run build command
