@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
 Run wallet automation and generate documentation
+
+Supports two input modes:
+1. Legacy: Python script (--script wallets/myapp/setup_walkthrough.py)
+2. Preferred: Config file (--config wallets/myapp/config.yaml)
 """
 
 import sys
@@ -12,7 +16,7 @@ from importlib.util import spec_from_file_location, module_from_spec
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core import WalletAutomation, AnnotationEngine, DocumentationGenerator
-from core.config import WalletConfig
+from scripts.wallet_factory import create_wallet_from_config
 
 
 def load_wallet_script(script_path: Path):
@@ -37,12 +41,42 @@ def load_wallet_script(script_path: Path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run wallet automation and generate documentation"
+        description="Run wallet automation and generate documentation",
+        epilog="""
+Examples:
+  # Preferred: Use config.yaml directly
+  python scripts/run_wallet.py wallets/blindbit/config.yaml
+
+  # Legacy: Use Python script
+  python scripts/run_wallet.py --script wallets/myapp/setup_walkthrough.py
+
+  # Generate docs only (no automation)
+  python scripts/run_wallet.py wallets/blindbit/config.yaml --docs-only
+        """
+    )
+
+    # Positional argument can be either config.yaml or script path
+    parser.add_argument(
+        "input_path",
+        type=Path,
+        nargs="?",
+        help="Path to wallet config.yaml (preferred) or setup script"
     )
     parser.add_argument(
-        "script",
+        "--script",
         type=Path,
-        help="Path to wallet automation script"
+        help="[LEGACY] Path to wallet automation script (use config.yaml instead)"
+    )
+    parser.add_argument(
+        "--config",
+        type=Path,
+        help="Path to wallet config.yaml (can also be passed as positional arg)"
+    )
+    parser.add_argument(
+        "--automation-type",
+        choices=["pyautogui", "appium"],
+        default="pyautogui",
+        help="Automation type when using config.yaml (default: pyautogui)"
     )
     parser.add_argument(
         "--no-annotate",
@@ -71,42 +105,63 @@ def main():
         help="Output to staging area (default: True)"
     )
     parser.add_argument(
-        "--config",
-        type=Path,
-        help="Path to wallet config.yaml"
-    )
-    parser.add_argument(
         "--sections",
         nargs="+",
         help="Only run specific sections (e.g., --sections setup usage)"
     )
-    
+
     args = parser.parse_args()
-    
-    # Validate script path
-    if not args.script.exists():
-        print(f"Error: Script not found: {args.script}")
+
+    # Determine input mode: config.yaml (preferred) or script (legacy)
+    wallet_script_path = None
+    wallet_config_path = None
+
+    # Priority: --config flag > --script flag > positional arg
+    # But always check if the path is actually a YAML file first
+    if args.config:
+        wallet_config_path = args.config
+    elif args.script:
+        # Check if --script was given a config.yaml (common mistake)
+        if args.script.name == "config.yaml" or args.script.suffix in [".yaml", ".yml"]:
+            wallet_config_path = args.script
+            print(f"Note: Detected YAML file with --script flag, treating as config")
+        else:
+            wallet_script_path = args.script
+    elif args.input_path:
+        # Auto-detect based on filename
+        if args.input_path.name == "config.yaml" or args.input_path.suffix in [".yaml", ".yml"]:
+            wallet_config_path = args.input_path
+        else:
+            wallet_script_path = args.input_path
+    else:
+        print("Error: Must provide either config.yaml or script path")
+        parser.print_help()
+        sys.exit(1)
+
+    # Validate input path exists
+    input_path = wallet_config_path or wallet_script_path
+    if not input_path.exists():
+        print(f"Error: Input file not found: {input_path}")
         sys.exit(1)
     
     print(f"\n{'='*70}")
-    print(f"Bitcoin Wallet Documentation Pipeline")
+    print(f"Silent Payment Documentation Pipeline")
     print(f"{'='*70}\n")
-    
-    # Load configuration if provided
-    config = None
-    if args.config and args.config.exists():
-        print(f"Loading configuration: {args.config}")
-        config = WalletConfig.from_yaml(str(args.config))
-    
-    # Load and execute wallet script
-    print(f"Loading wallet script: {args.script}")
-    try:
-        wallet = load_wallet_script(args.script)
 
-        # Override config if provided
-        if config:
-            wallet.config = config
-            wallet.config.ensure_directories()
+    # Load wallet automation
+    try:
+        if wallet_config_path:
+            # NEW: Load directly from config.yaml
+            print(f"Loading wallet from config: {wallet_config_path}")
+            print(f"Automation type: {args.automation_type}")
+            wallet = create_wallet_from_config(
+                wallet_config_path,
+                automation_type=args.automation_type
+            )
+        else:
+            # LEGACY: Load from Python script
+            print(f"Loading wallet script: {wallet_script_path}")
+            wallet = load_wallet_script(wallet_script_path)
 
         # Documentation-only mode: skip automation
         if args.docs_only:

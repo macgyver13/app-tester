@@ -148,7 +148,7 @@ def regenerate_index(output_dir: Path):
         # Load wallet configuration
         config_path = wallet_dir.parent.parent / "wallets" / wallet_dir.name / "config.yaml"
         wallet_name = wallet_dir.name.replace("_", " ").title()
-        description = f"Bitcoin wallet user guide for {wallet_name}"
+        description = f"Silent Payment user guide for {wallet_name}"
 
         if config_path.exists():
             try:

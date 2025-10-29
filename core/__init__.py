@@ -1,5 +1,5 @@
 """
-Bitcoin Wallet Documentation Pipeline - Core Modules
+Silent Payment Documentation Pipeline - Core Modules
 """
 
 __version__ = "0.1.0"

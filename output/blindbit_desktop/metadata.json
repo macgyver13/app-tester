@@ -87,10 +87,10 @@
     {
       "number": 16,
       "name": "Receive",
-      "description": "Generate addresses to receive payments",
+      "description": "Copy silent payments address to share with others",
       "section": "overview",
       "flags": [],
-      "notes": "",
+      "notes": "Only one address is required, each transaction will have a unique on chain taproot address",
       "screenshot": "output/staging/blindbit_desktop/screenshots/overview_receive.png",
       "screenshot_relative": "screenshots/overview_receive.png"
     },
@@ -272,10 +272,10 @@
       {
         "number": 16,
         "name": "Receive",
-        "description": "Generate addresses to receive payments",
+        "description": "Copy silent payments address to share with others",
         "section": "overview",
         "flags": [],
-        "notes": "",
+        "notes": "Only one address is required, each transaction will have a unique on chain taproot address",
         "screenshot": "output/staging/blindbit_desktop/screenshots/overview_receive.png",
         "screenshot_relative": "screenshots/overview_receive.png"
       },
@@ -383,7 +383,6 @@
   "has_changed_features": false,
   "source_url": "https://github.com/setavenger/blindbit-desktop",
   "build_instructions": "Instructions for compiling BlindBit Desktop from [source](https://github.com/setavenger/blindbit-desktop?tab=readme-ov-file#prerequisites)\nQuick Start\n1. Verify Go version 1.24 or later\n```\ngo version\n```\n2. Compile blindbit-desktop\n```\ncd blindbit-desktop\ngit checkout -B alpha origin/alpha\ngo build -o blindbit-desktop ./cmd/blindbit-desktop\n./blindbit-desktop\n```",
-  "has_build_info": true,
   "screenshot_max_height": 500,
   "troubleshooting": "### Screenshots Don't Match\n- Verify the wallet was compiled from the correct branch \"alpha\"\n\n### Sync Issues\n- Verify your internet connection\n- Check firewall settings\n- Allow sufficient time for blockchain synchronization\n"
 }

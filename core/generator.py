@@ -159,7 +159,7 @@ class DocumentationGenerator:
     def generate_index(self, wallet_docs: List[Dict[str, Any]], output_path: Path):
         """Generate an index page for all wallet documentation"""
         template_data = {
-            "title": "Bitcoin Wallet Documentation",
+            "title": "Silent Payment Documentation",
             "wallets": wallet_docs,
             "total_wallets": len(wallet_docs),
             "generated_date": datetime.now().strftime("%Y-%m-%d"),

@@ -205,7 +205,9 @@ python scripts/run_wallet.py wallets/my-wallet/setup_walkthrough.py --sections s
 cat wallets/blindbit/config.yaml
 
 # Run the example
-python scripts/run_wallet.py wallets/blindbit/setup_walkthrough.py --docs-only
+python scripts/run_wallet.py --script wallets/blindbit/config.yaml --sections setup overview sending receiving --docs-only
+
+python scripts/run_wallet.py --script wallets/sparrow/config.yaml --sections setup overview sending sending_contacts --docs-only
 
 # View generated docs
 open output/staging/blindbit_desktop/user-guide.md

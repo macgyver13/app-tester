@@ -152,11 +152,13 @@ Send bitcoin to other wallets
 
 #### Receive
 
-Generate addresses to receive payments
+Copy silent payments address to share with others
 
 <img src="screenshots/overview_receive.png" alt="Receive" style="max-height: 500px;">
 
 
+**Note:**
+> Only one address is required, each transaction will have a unique on chain taproot address
 
 ---
 

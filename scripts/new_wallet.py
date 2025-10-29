@@ -9,7 +9,7 @@ import shutil
 
 def main():
     print("\n" + "="*70)
-    print("Bitcoin Wallet Documentation - New Wallet Wizard")
+    print("Silent Payment Documentation - New Wallet Wizard")
     print("="*70 + "\n")
     
     # Get wallet name

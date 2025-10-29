@@ -1,15 +1,32 @@
 """
 Template wallet automation script
 
-Copy this template to create new wallet documentation:
+PREFERRED APPROACH: Use config.yaml directly (no script needed!)
+=================================================================
+
+For most wallets, you don't need this setup_walkthrough.py file at all!
+
+Quick Start:
 1. cp -r wallets/template wallets/<your-wallet>
 2. Edit config.yaml with your wallet details
-3. Choose your approach: config-driven (recommended) or code-driven
-4. Run: python scripts/run_wallet.py wallets/<your-wallet>/setup_walkthrough.py
+3. Run: python scripts/run_wallet.py wallets/<your-wallet>/config.yaml
 
-NEW: This template supports two approaches:
-- Config-driven: Define steps in config.yaml (RECOMMENDED for most wallets)
-- Code-driven: Define steps in Python code (for complex logic)
+That's it! The config.yaml is all you need.
+
+WHEN TO USE THIS SCRIPT:
+========================
+Only create a setup_walkthrough.py if you need:
+- Complex conditional logic
+- Dynamic step generation
+- Programmatic coordinate calculation
+- Custom Python code during automation
+
+Otherwise, delete this file and use config.yaml directly.
+
+This template shows three approaches:
+1. Config-driven: Define steps in config.yaml (RECOMMENDED - no script needed!)
+2. Code-driven: Define steps in Python code (for complex logic)
+3. Hybrid: Mix config and code
 """
 
 import sys
@@ -52,17 +69,23 @@ def create_automation():
     # )
 
     # ============================================================================
-    # APPROACH 1: CONFIG-DRIVEN (RECOMMENDED)
+    # APPROACH 1: CONFIG-DRIVEN (RECOMMENDED - YOU PROBABLY DON'T NEED THIS FILE!)
     # ============================================================================
     # Load all steps from config.yaml - this is the preferred approach!
+    #
+    # NOTE: If you're using this approach, you can skip this setup_walkthrough.py
+    # file entirely and just run:
+    #
+    #     python scripts/run_wallet.py wallets/yourwallet/config.yaml
     #
     # Benefits:
     # - Single source of truth in config.yaml
     # - Easy to update coordinates and descriptions
     # - Non-developers can modify the automation
     # - Cleaner, more maintainable code
+    # - No boilerplate Python files needed
     #
-    # To use this approach:
+    # If you still want to use this script:
     # 1. Define sections, coordinates, and steps in config.yaml
     # 2. Uncomment the line below
     # 3. Comment out or remove the code-driven approach
