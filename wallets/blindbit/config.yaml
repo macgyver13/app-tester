@@ -278,7 +278,7 @@ documentation:
           screenshot: true
   troubleshooting: |
     ### Screenshots Don't Match
-    - Verify the wallet was compiled from the correct branch "rework"
+    - Verify the wallet was compiled from the correct branch "alpha"
     
     ### Sync Issues
     - Verify your internet connection
@@ -297,7 +297,7 @@ build:
     2. Compile blindbit-desktop
     ```
     cd blindbit-desktop
-    git checkout -B rework origin/rework
+    git checkout -B alpha origin/alpha
     go build -o blindbit-desktop ./cmd/blindbit-desktop
     ./blindbit-desktop
     ```

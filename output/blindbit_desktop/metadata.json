@@ -2,7 +2,7 @@
   "title": "BlindBit Desktop User Guide",
   "wallet_name": "BlindBit Desktop",
   "description": "Step-by-step guide to setting up and using BlindBit Desktop wallet",
-  "generated_date": "2025-10-28",
+  "generated_date": "2025-10-29",
   "steps": [
     {
       "number": 2,
@@ -382,8 +382,8 @@
   "has_new_features": false,
   "has_changed_features": false,
   "source_url": "https://github.com/setavenger/blindbit-desktop",
-  "build_instructions": "Instructions for compiling BlindBit Desktop from [source](https://github.com/setavenger/blindbit-desktop?tab=readme-ov-file#prerequisites)\nQuick Start\n1. Verify Go version 1.24 or later\n```\ngo version\n```\n2. Compile blindbit-desktop\n```\ncd blindbit-desktop\ngit checkout -B rework origin/rework\ngo build -o blindbit-desktop ./cmd/blindbit-desktop\n./blindbit-desktop\n```",
+  "build_instructions": "Instructions for compiling BlindBit Desktop from [source](https://github.com/setavenger/blindbit-desktop?tab=readme-ov-file#prerequisites)\nQuick Start\n1. Verify Go version 1.24 or later\n```\ngo version\n```\n2. Compile blindbit-desktop\n```\ncd blindbit-desktop\ngit checkout -B alpha origin/alpha\ngo build -o blindbit-desktop ./cmd/blindbit-desktop\n./blindbit-desktop\n```",
   "has_build_info": true,
   "screenshot_max_height": 500,
-  "troubleshooting": "### Screenshots Don't Match\n- Verify the wallet was compiled from the correct branch \"rework\"\n\n### Sync Issues\n- Verify your internet connection\n- Check firewall settings\n- Allow sufficient time for blockchain synchronization\n"
+  "troubleshooting": "### Screenshots Don't Match\n- Verify the wallet was compiled from the correct branch \"alpha\"\n\n### Sync Issues\n- Verify your internet connection\n- Check firewall settings\n- Allow sufficient time for blockchain synchronization\n"
 }

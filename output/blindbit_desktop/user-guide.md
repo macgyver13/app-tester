@@ -1,6 +1,6 @@
 # BlindBit Desktop User Guide
 
-> **Last Updated:** 2025-10-28
+> **Last Updated:** 2025-10-29
 
 Step-by-step guide to setting up and using BlindBit Desktop wallet
 
@@ -30,7 +30,7 @@ go version
 2. Compile blindbit-desktop
 ```
 cd blindbit-desktop
-git checkout -B rework origin/rework
+git checkout -B alpha origin/alpha
 go build -o blindbit-desktop ./cmd/blindbit-desktop
 ./blindbit-desktop
 ```
@@ -297,7 +297,7 @@ UTXOs will appear here automatically after confirmation
 ## Troubleshooting
 
 ### Screenshots Don't Match
-- Verify the wallet was compiled from the correct branch "rework"
+- Verify the wallet was compiled from the correct branch "alpha"
 
 ### Sync Issues
 - Verify your internet connection

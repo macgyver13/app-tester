@@ -1,6 +1,6 @@
 # Silent Payments App Index
 
-> **Last Updated:** 2025-10-28
+> **Last Updated:** 2025-10-29
 
 This repository contains automated documentation for 1 Bitcoin wallet applications.
 
