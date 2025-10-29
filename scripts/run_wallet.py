@@ -179,13 +179,14 @@ def main():
         else:
             screenshots_dir = wallet.config.screenshots_dir
 
-        # Annotate screenshots (skip if no screenshots were taken, or if docs-only mode)
-        if not args.no_annotate and not args.no_screenshots and not args.docs_only:
+        # Annotate screenshots (skip if no screenshots were taken)
+        if not args.no_annotate and not args.no_screenshots:
             print("\n" + "="*70)
             print("PHASE 2: Annotation")
             print("="*70 + "\n")
 
-            engine = AnnotationEngine()
+            # Pass display_scale from config to AnnotationEngine
+            engine = AnnotationEngine(display_scale=wallet.config.display_scale)
             annotated = engine.batch_annotate(
                 steps,
                 screenshots_dir

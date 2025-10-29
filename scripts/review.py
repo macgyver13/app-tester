@@ -50,6 +50,28 @@ def show_diff(staging_path: Path, output_path: Path):
         print("  ⚠️  Files differ in size")
 
 
+def get_used_screenshots(metadata_path: Path) -> set[str]:
+    """Extract list of screenshot filenames from metadata.json"""
+    if not metadata_path.exists():
+        return set()
+
+    try:
+        with open(metadata_path, 'r') as f:
+            metadata = json.load(f)
+
+        screenshots = set()
+        for step in metadata.get('steps', []):
+            screenshot_rel = step.get('screenshot_relative', '')
+            if screenshot_rel:
+                # Extract just the filename from the relative path
+                screenshots.add(Path(screenshot_rel).name)
+
+        return screenshots
+    except Exception as e:
+        print(f"  Warning: Could not parse metadata.json: {e}")
+        return set()
+
+
 def approve_wallet(wallet_name: str, staging_dir: Path, output_dir: Path):
     """Move wallet documentation from staging to final output"""
     staging_wallet = staging_dir / wallet_name
@@ -62,17 +84,41 @@ def approve_wallet(wallet_name: str, staging_dir: Path, output_dir: Path):
     # Create output directory
     output_wallet.mkdir(parents=True, exist_ok=True)
 
-    # Copy all files
+    # Get list of used screenshots from metadata
+    metadata_path = staging_wallet / "metadata.json"
+    used_screenshots = get_used_screenshots(metadata_path)
+
+    # Copy files selectively
+    screenshots_copied = 0
+    screenshots_skipped = 0
+
     for item in staging_wallet.iterdir():
         dest = output_wallet / item.name
-        if item.is_dir():
+
+        # Handle screenshots directory specially
+        if item.is_dir() and item.name == "screenshots":
+            dest.mkdir(exist_ok=True)
+
+            # Only copy screenshots that are referenced in metadata
+            for screenshot in item.iterdir():
+                if screenshot.name in used_screenshots:
+                    shutil.copy2(screenshot, dest / screenshot.name)
+                    screenshots_copied += 1
+                else:
+                    screenshots_skipped += 1
+        elif item.is_dir():
+            # Copy other directories as-is
             shutil.copytree(item, dest, dirs_exist_ok=True)
         else:
+            # Copy regular files
             shutil.copy2(item, dest)
 
     print(f"✓ Published: {wallet_name}")
     print(f"  From: {staging_wallet}")
     print(f"  To: {output_wallet}")
+
+    if screenshots_copied > 0 or screenshots_skipped > 0:
+        print(f"  Screenshots: {screenshots_copied} copied, {screenshots_skipped} skipped")
 
     return True
 

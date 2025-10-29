@@ -33,6 +33,7 @@ class WalletConfig:
     screenshot_delay: float = 1.0
     implicit_wait: int = 10
     window_size: tuple = (1200, 800)
+    display_scale: float = 1.0  # Display scaling factor (2.0 for retina, 1.0 for non-retina)
 
     # Documentation settings
     title: str = ""
@@ -117,6 +118,7 @@ class WalletConfig:
             startup_wait=automation_data.get('startup_wait', 3),
             screenshot_delay=automation_data.get('screenshot_delay', 1.0),
             implicit_wait=automation_data.get('implicit_wait', 10),
+            display_scale=automation_data.get('display_scale', 1.0),
             title=doc_data.get('title', ''),
             description=doc_data.get('description', ''),
             output_format=doc_data.get('output_format', 'markdown'),

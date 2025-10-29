@@ -30,44 +30,62 @@ from .config import WalletConfig
 @dataclass
 class Annotation:
     """Visual annotation for screenshots"""
-    
-    type: Literal["arrow", "box", "highlight", "blur", "text", "number"]
+
+    type: Literal["arrow", "box", "highlight", "blur", "text", "number", "circle"]
     target: Optional[str] = None  # Element selector or coordinates
     position: Optional[tuple] = None  # (x, y) coordinates
     label: Optional[str] = None
     color: str = "red"
     thickness: int = 2
     size: Optional[tuple] = None  # For boxes: (width, height)
-    
+    region: Optional[tuple] = None  # For blur: (x, y, width, height)
+    radius: Optional[int] = None  # For circles: radius in pixels
+
     @classmethod
     def arrow(cls, target: str, label: Optional[str] = None, color: str = "red") -> "Annotation":
         """Create an arrow annotation"""
         return cls(type="arrow", target=target, label=label, color=color)
-    
+
     @classmethod
     def box(cls, target: str, color: str = "blue", thickness: int = 3) -> "Annotation":
         """Create a box annotation"""
         return cls(type="box", target=target, color=color, thickness=thickness)
-    
+
     @classmethod
     def highlight(cls, target: str, color: str = "yellow") -> "Annotation":
         """Create a highlight annotation"""
         return cls(type="highlight", target=target, color=color)
-    
+
     @classmethod
-    def blur(cls, target: str) -> "Annotation":
-        """Create a blur annotation for sensitive data"""
-        return cls(type="blur", target=target)
-    
+    def blur(cls, region: tuple) -> "Annotation":
+        """Create a blur annotation for sensitive data
+
+        Args:
+            region: Tuple of (x, y, width, height) defining the area to blur
+        """
+        return cls(type="blur", region=region)
+
     @classmethod
     def text(cls, text: str, position: tuple, color: str = "black") -> "Annotation":
         """Create a text callout annotation"""
         return cls(type="text", label=text, position=position, color=color)
-    
+
     @classmethod
     def number(cls, number: int, target: str, color: str = "blue") -> "Annotation":
         """Create a numbered step annotation"""
         return cls(type="number", label=str(number), target=target, color=color)
+
+    @classmethod
+    def circle(cls, position: tuple, radius: int = 30, color: str = "red", thickness: int = 2) -> "Annotation":
+        """Create a circle annotation for highlighting click locations
+
+        Args:
+            position: Tuple of (x, y) defining the center of the circle
+            radius: Circle radius in pixels (default: 30)
+            color: Circle color (default: "red")
+            thickness: Line thickness (default: 2)
+        """
+        return cls(type="circle", position=position, radius=radius, color=color, thickness=thickness)
 
 
 @dataclass
@@ -153,6 +171,43 @@ class BaseAutomation(ABC):
                 step_dict['crop_region'] = tuple(step_dict['crop_region'])
             if 'target' in step_dict and isinstance(step_dict['target'], list):
                 step_dict['target'] = tuple(step_dict['target'])
+
+            # Convert annotation dicts to Annotation objects
+            if 'annotations' in step_dict:
+                annotations = step_dict['annotations']
+                if annotations:
+                    # Handle single annotation or list of annotations
+                    if not isinstance(annotations, list):
+                        annotations = [annotations]
+
+                    converted_annotations = []
+                    for ann in annotations:
+                        if isinstance(ann, dict):
+                            # Validate required fields based on annotation type
+                            ann_type = ann.get('type')
+                            if ann_type == 'blur' and not ann.get('region'):
+                                print(f"  Warning: Skipping blur annotation without 'region' field in step '{step_dict.get('name', 'unknown')}'")
+                                continue
+
+                            # Convert lists to tuples
+                            if 'region' in ann and isinstance(ann['region'], list):
+                                ann['region'] = tuple(ann['region'])
+                            if 'position' in ann and isinstance(ann['position'], list):
+                                ann['position'] = tuple(ann['position'])
+                            if 'size' in ann and isinstance(ann['size'], list):
+                                ann['size'] = tuple(ann['size'])
+
+                            try:
+                                converted_annotations.append(Annotation(**ann))
+                            except TypeError as e:
+                                print(f"  Warning: Failed to create annotation in step '{step_dict.get('name', 'unknown')}': {e}")
+                                continue
+                        elif isinstance(ann, Annotation):
+                            converted_annotations.append(ann)
+                        else:
+                            print(f"  Warning: Invalid annotation format in step '{step_dict.get('name', 'unknown')}': {ann}")
+
+                    step_dict['annotations'] = converted_annotations
 
             step = Step(**step_dict)
             self.add_step(step)
@@ -585,11 +640,18 @@ class PyAutoGUIAutomation(BaseAutomation):
         app_path: str,
         version: str = "1.0.0",
         config: Optional[WalletConfig] = None,
-        scale_factor: float = 2.0
+        scale_factor: Optional[float] = None
     ):
         super().__init__(name, app_path, version, config)
         self.app_process = None
-        self.scale_factor = scale_factor  # Retina DPI scaling
+
+        # Prefer explicit scale_factor, fall back to config, default to 1.0
+        if scale_factor is not None:
+            self.scale_factor = scale_factor
+        elif config and hasattr(config, 'display_scale'):
+            self.scale_factor = config.display_scale
+        else:
+            self.scale_factor = 1.0
 
         # Import pyautogui lazily to avoid dependency if not used
         try:
@@ -650,6 +712,13 @@ class PyAutoGUIAutomation(BaseAutomation):
             wait_time = float(step.value) if step.value else 1.0
             time.sleep(wait_time)
             print(f"  Waited {wait_time} seconds")
+        
+        elif step.action == "clickthentype" and step.target and step.value:
+            x, y = step.target
+            self.pyautogui.click(x, y, clicks=step.clicks)
+            print(f"  Clicked at: ({x}, {y})")
+            self.pyautogui.write(step.value, interval=0.001)
+            print(f"  Typed: {step.value}")
 
         # Wait after action (let next state load)
         if step.wait_after > 0:

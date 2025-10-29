@@ -157,7 +157,8 @@ documentation:
           screenshot: true
 
         - name: Receive
-          description: Generate addresses to receive payments
+          description: Copy silent payments address to share with others
+          notes: Only one address is required, each transaction will have a unique on chain taproot address
           action: click
           target: transactions_tab
           screenshot: true

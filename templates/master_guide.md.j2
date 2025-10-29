@@ -8,7 +8,7 @@
 
 ## Table of Contents
 
-{% if has_build_info %}
+{% if build_instructions %}
 - [Building from Source](#building-from-source)
 {% endif %}
 {% if sections %}
@@ -28,16 +28,14 @@
 
 ---
 
-{% if has_build_info %}
+{% if build_instructions %}
 ## Building from Source
 
 {% if source_url %}
 **Source Code:** {{ source_url }}
 {% endif %}
 
-{% if build_instructions %}
 {{ build_instructions }}
-{% endif %}
 
 ---
 {% endif %}

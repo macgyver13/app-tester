@@ -13,10 +13,11 @@ from .automation import Step, Annotation
 
 class AnnotationEngine:
     """Engine for applying visual annotations to screenshots"""
-    
-    def __init__(self, font_path: Optional[str] = None, font_size: int = 16):
+
+    def __init__(self, font_path: Optional[str] = None, font_size: int = 30, display_scale: float = 1.0):
         self.font_size = font_size
         self.font = self._load_font(font_path, font_size)
+        self.display_scale = display_scale  # Display scale factor (2.0 for retina, 1.0 for non-retina)
         
         # Color mappings (BGR for OpenCV, RGB for PIL)
         self.colors_bgr = {
@@ -93,6 +94,8 @@ class AnnotationEngine:
                 pil_img = self._draw_text(pil_img, annotation)
             elif annotation.type == "number":
                 img = self._draw_number(img, annotation, step)
+            elif annotation.type == "circle":
+                img = self._draw_circle(img, annotation, step)
         
         # Convert PIL image back to OpenCV if it was modified
         if any(a.type in ["highlight", "blur", "text"] for a in step.annotations):
@@ -139,80 +142,165 @@ class AnnotationEngine:
         return img
     
     def _draw_box(self, img: np.ndarray, annotation: Annotation, step: Step) -> np.ndarray:
-        """Draw a box around an element"""
-        if not step.element_bounds:
+        """Draw a box around an element
+
+        Coordinates in annotation.region are in LOGICAL PIXELS.
+        They're converted to physical pixels based on display_scale.
+
+        Supports two modes:
+        1. annotation.region: (x, y, width, height) for coordinate-based box (PyAutoGUI)
+        2. step.element_bounds: For element-based box (Appium)
+        """
+        # Try annotation.region first (for PyAutoGUI)
+        if annotation.region:
+            x, y, width, height = annotation.region  # Logical pixels from config
+
+            # Convert to physical pixels using display scale
+            phys_x = int(x * self.display_scale)
+            phys_y = int(y * self.display_scale)
+            phys_width = int(width * self.display_scale)
+            phys_height = int(height * self.display_scale)
+
+            top_left = (phys_x, phys_y)
+            bottom_right = (phys_x + phys_width, phys_y + phys_height)
+        # Fall back to element_bounds (for Appium)
+        elif step.element_bounds:
+            bounds = step.element_bounds
+            top_left = (bounds['x'], bounds['y'])
+            bottom_right = (bounds['x'] + bounds['width'], bounds['y'] + bounds['height'])
+        else:
+            print(f"  Warning: Box annotation missing both 'region' and element_bounds in step '{step.name}'")
             return img
-        
-        bounds = step.element_bounds
+
         color = self.colors_bgr.get(annotation.color, (255, 0, 0))
-        
-        top_left = (bounds['x'], bounds['y'])
-        bottom_right = (bounds['x'] + bounds['width'], bounds['y'] + bounds['height'])
-        
         cv2.rectangle(img, top_left, bottom_right, color, annotation.thickness)
-        
+
         return img
     
     def _draw_highlight(self, img: Image.Image, annotation: Annotation, step: Step) -> Image.Image:
-        """Draw a semi-transparent highlight over an element"""
-        if not step.element_bounds:
+        """Draw a semi-transparent highlight over an element
+
+        Coordinates in annotation.region are in LOGICAL PIXELS.
+        They're converted to physical pixels based on display_scale.
+
+        Supports two modes:
+        1. annotation.region: (x, y, width, height) for coordinate-based highlight (PyAutoGUI)
+        2. step.element_bounds: For element-based highlight (Appium)
+        """
+        # Try annotation.region first (for PyAutoGUI)
+        if annotation.region:
+            x, y, width, height = annotation.region  # Logical pixels from config
+
+            # Convert to physical pixels using display scale
+            phys_x = int(x * self.display_scale)
+            phys_y = int(y * self.display_scale)
+            phys_width = int(width * self.display_scale)
+            phys_height = int(height * self.display_scale)
+
+            box = [phys_x, phys_y, phys_x + phys_width, phys_y + phys_height]
+        # Fall back to element_bounds (for Appium)
+        elif step.element_bounds:
+            bounds = step.element_bounds
+            box = [
+                bounds['x'],
+                bounds['y'],
+                bounds['x'] + bounds['width'],
+                bounds['y'] + bounds['height']
+            ]
+        else:
+            print(f"  Warning: Highlight annotation missing both 'region' and element_bounds in step '{step.name}'")
             return img
-        
-        bounds = step.element_bounds
+
         overlay = Image.new('RGBA', img.size, (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
-        
+
         color_rgb = self.colors_rgb.get(annotation.color, (255, 255, 0))
         color_with_alpha = color_rgb + (100,)  # 100 = alpha value
-        
-        box = [
-            bounds['x'],
-            bounds['y'],
-            bounds['x'] + bounds['width'],
-            bounds['y'] + bounds['height']
-        ]
+
         draw.rectangle(box, fill=color_with_alpha)
-        
+
         # Composite with original image
         img = img.convert('RGBA')
         img = Image.alpha_composite(img, overlay)
         return img.convert('RGB')
     
     def _draw_blur(self, img: Image.Image, annotation: Annotation, step: Step) -> Image.Image:
-        """Apply blur to an element (for sensitive data)"""
-        if not step.element_bounds:
+        """Apply blur to an element (for sensitive data)
+
+        Coordinates in annotation.region are in LOGICAL PIXELS.
+        They're converted to physical pixels based on detected screenshot scale.
+
+        Supports two modes:
+        1. annotation.region: (x, y, width, height) for coordinate-based blur (PyAutoGUI)
+        2. step.element_bounds: For element-based blur (Appium)
+        """
+        # Try annotation.region first (for PyAutoGUI)
+        if annotation.region:
+            x, y, width, height = annotation.region  # Logical pixels from config
+
+            # Convert to physical pixels using display scale
+            phys_x = int(x * self.display_scale)
+            phys_y = int(y * self.display_scale)
+            phys_width = int(width * self.display_scale)
+            phys_height = int(height * self.display_scale)
+
+            box = (phys_x, phys_y, phys_x + phys_width, phys_y + phys_height)
+        # Fall back to element_bounds (for Appium)
+        elif step.element_bounds:
+            bounds = step.element_bounds
+            box = (
+                bounds['x'],
+                bounds['y'],
+                bounds['x'] + bounds['width'],
+                bounds['y'] + bounds['height']
+            )
+        else:
+            print(f"  Warning: Blur annotation missing both 'region' and element_bounds in step '{step.name}'")
             return img
-        
-        bounds = step.element_bounds
-        
+
+        # Ensure coordinates are within image bounds
+        x1, y1, x2, y2 = box
+        x1 = max(0, x1)
+        y1 = max(0, y1)
+        x2 = min(img.width, x2)
+        y2 = min(img.height, y2)
+
+        if x1 >= x2 or y1 >= y2:
+            print(f"  Warning: Blur region {box} out of bounds for image size {img.size}")
+            return img
+
         # Extract region to blur
-        box = (
-            bounds['x'],
-            bounds['y'],
-            bounds['x'] + bounds['width'],
-            bounds['y'] + bounds['height']
-        )
+        box = (x1, y1, x2, y2)
         region = img.crop(box)
-        
+
         # Apply Gaussian blur
         blurred = region.filter(ImageFilter.GaussianBlur(radius=15))
-        
+
         # Paste back
         img.paste(blurred, box)
-        
+
         return img
-    
+
     def _draw_text(self, img: Image.Image, annotation: Annotation) -> Image.Image:
-        """Draw text callout"""
+        """Draw text callout
+
+        Coordinates in annotation.position are in LOGICAL PIXELS.
+        They're converted to physical pixels based on display_scale.
+        """
         if not annotation.position or not annotation.label:
             return img
-        
+
         draw = ImageDraw.Draw(img)
         color = self.colors_rgb.get(annotation.color, (0, 0, 0))
-        
+
         # Draw text with background
         text = annotation.label
-        position = annotation.position
+
+        # Convert logical pixels to physical pixels
+        x_logical, y_logical = annotation.position
+        x_phys = int(x_logical * self.display_scale)
+        y_phys = int(y_logical * self.display_scale)
+        position = (x_phys, y_phys)
         
         # Get text size (approximate)
         bbox = draw.textbbox(position, text, font=self.font)
@@ -239,29 +327,57 @@ class AnnotationEngine:
         target_pos = self._get_element_center(step)
         if not target_pos:
             return img
-        
+
         color = self.colors_bgr.get(annotation.color, (255, 0, 0))
-        
+
         # Draw circle
         radius = 20
         cv2.circle(img, target_pos, radius, color, -1)  # Filled circle
         cv2.circle(img, target_pos, radius, (255, 255, 255), 2)  # White border
-        
+
         # Draw number
         if annotation.label:
             text = annotation.label
             font = cv2.FONT_HERSHEY_SIMPLEX
             font_scale = 0.7
             thickness = 2
-            
+
             # Get text size to center it
             text_size = cv2.getTextSize(text, font, font_scale, thickness)[0]
             text_x = target_pos[0] - text_size[0] // 2
             text_y = target_pos[1] + text_size[1] // 2
-            
+
             cv2.putText(img, text, (text_x, text_y), font, font_scale,
                        (255, 255, 255), thickness, cv2.LINE_AA)
-        
+
+        return img
+
+    def _draw_circle(self, img: np.ndarray, annotation: Annotation, step: Step) -> np.ndarray:
+        """Draw a circle to highlight a click location
+
+        Coordinates in annotation.position are in LOGICAL PIXELS.
+        They're converted to physical pixels based on display_scale.
+        """
+        if not annotation.position:
+            return img
+
+        # Convert logical pixels to physical pixels
+        x_logical, y_logical = annotation.position
+        x_phys = int(x_logical * self.display_scale)
+        y_phys = int(y_logical * self.display_scale)
+        center = (x_phys, y_phys)
+
+        # Get radius and scale it
+        radius = annotation.radius if annotation.radius else 30
+        radius_phys = int(radius * self.display_scale)
+
+        color = self.colors_bgr.get(annotation.color, (0, 0, 255))  # Default red
+        thickness = annotation.thickness if annotation.thickness else 2
+        thickness_phys = int(thickness * self.display_scale)
+
+        # Draw circle outline
+        cv2.circle(img, center, radius_phys, color, thickness_phys, cv2.LINE_AA)
+
         return img
     
     def batch_annotate(self, steps: List[Step], output_dir: Path) -> List[Path]:

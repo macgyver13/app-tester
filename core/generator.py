@@ -152,7 +152,6 @@ class DocumentationGenerator:
             "has_changed_features": len(changed_features) > 0,
             "source_url": self.config.source_url,
             "build_instructions": self.config.build_instructions,
-            "has_build_info": bool(self.config.source_url or self.config.build_instructions),
             "screenshot_max_height": self.config.screenshot_max_height,
             "troubleshooting": self.config.troubleshooting,
         }
@@ -303,7 +302,6 @@ class DocumentationGenerator:
             "section_configs": section_configs,
             "source_url": self.config.source_url,
             "build_instructions": self.config.build_instructions,
-            "has_build_info": bool(self.config.source_url or self.config.build_instructions),
             "screenshot_max_height": self.config.screenshot_max_height,
             "troubleshooting": self.config.troubleshooting,
         }

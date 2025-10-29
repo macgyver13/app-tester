@@ -1,0 +1,339 @@
+wallet:
+  name: Sparrow
+  type: desktop
+  platforms:
+  - macos
+automation:
+  startup_wait: 2
+  screenshot_delay: 1.0
+  implicit_wait: 10
+  display_scale: 2.0
+documentation:
+  title: Sparrow User Guide
+  description: Step-by-step guide to setting up and using Sparrow wallet with silent
+    payments
+  output_format: markdown
+  embed_images: true
+  screenshot_max_height: 500
+  sections:
+    setup:
+      title: Initial Wallet Setup
+      description: This workflow demonstrates how to create a wallet for silent payments
+      crop:
+      - 329.2265625
+      - 259.71875
+      - 1129.484375
+      - 752.66015625
+      coordinates:
+        settings:
+        - 436
+        - 919
+      steps:
+      - name: Activate window
+        description: null
+        action: click
+        target: settings
+        omit_from_output: true
+      - name: Create New Wallet
+        description: 'Create a new wallet using this [guide](https://www.sparrowwallet.com/docs/quick-start.html#creating-your-first-wallet)
+
+          Policy Type: "Single Signature"
+
+          Script Type: "Taproot (P2TR)"
+
+          Derivation: m/86''/0''/0''
+
+          '
+        notes: 'Type: "Software Wallet" required at this time to send silent payments'
+        action: screenshot
+        screenshot: true
+        annotations:
+        - type: blur
+          region:
+          - 395
+          - 574
+          - 613
+          - 42
+        - type: blur
+          region:
+          - 395
+          - 501
+          - 112
+          - 20
+    overview:
+      title: Using Sparrow
+      description: Overview of wallet and navigation
+      crop:
+      - 329.2265625
+      - 259.71875
+      - 1129.484375
+      - 752.66015625
+      coordinates:
+        transactions:
+        - 431
+        - 377
+        send:
+        - 422
+        - 485
+        receive:
+        - 394
+        - 575
+        addresses:
+        - 421
+        - 704
+        utxos:
+        - 418
+        - 836
+        settings:
+        - 436
+        - 919
+      steps:
+      - name: Activate window
+        description: null
+        action: click
+        target: transactions
+        omit_from_output: true
+      - name: Transactions
+        description: View wallet balance and transaction history
+        action: click
+        target: send
+        screenshot: true
+      - name: Send
+        description: Send bitcoin to other wallets
+        action: click
+        target: settings
+        screenshot: true
+    sending:
+      title: Sending Transactions
+      description: Highlight the process for sending a payment to a silent payment
+        address
+      crop:
+      - 329.2265625
+      - 259.71875
+      - 1129.484375
+      - 752.66015625
+      coordinates:
+        send:
+        - 422
+        - 485
+        send_payto:
+        - 701
+        - 407
+        label:
+        - 678
+        - 445
+        amount:
+        - 698
+        - 488
+        create_transaction:
+        - 1331
+        - 932
+        fee_range:
+        - 691
+        - 588
+        fee:
+        - 675
+        - 683
+        finalize_transaction:
+        - 978
+        - 854
+        sign_transaction:
+        - 1317
+        - 849
+        broadcast_transaction:
+        - 1300
+        - 851
+      steps:
+      - name: Activate window
+        description: null
+        action: click
+        clicks: 2
+        target: send
+        omit_from_output: true
+      - name: Enter "Pay to"
+        description: null
+        action: clickthentype
+        value: sp1qqfnhjuj38wczsuvcr0hqnsm3trl4jqcz6zw4q362lqejxkqkmuhjwqegcmprav88207355ds4s9lu58lg2stfmd6ghvall8hy9n939dltsf9kcvj
+        target: send_payto
+        omit_from_output: true
+      - name: Enter label
+        description: null
+        action: clickthentype
+        target: label
+        value: silent payment to blindbit
+        omit_from_output: true
+      - name: Enter amount
+        description: null
+        action: clickthentype
+        target: amount
+        value: '2000'
+        omit_from_output: true
+      - name: Select fee rate
+        description: null
+        action: click
+        target: fee_range
+        omit_from_output: true
+      - name: Enter Recipient Information
+        description: 'Enter "Pay to"
+
+          Enter "Label"
+
+          Enter "Amount"
+
+          Select "Send Transaction" to view details
+
+          '
+        notes: 'Human Readable Names (HRN) or silent payment addresses are supported
+
+          '
+        action: click
+        target: create_transaction
+        screenshot: true
+      - name: Finalize Transaction
+        description: null
+        notes: '"Pay to" displays the silent payment address'
+        action: click
+        target: finalize_transaction
+        screenshot: true
+      - name: Sign Transaction
+        description: null
+        action: click
+        target: sign_transaction
+        screenshot: true
+      - name: Broadcast Transaction
+        description: null
+        action: screenshot
+        screenshot: true
+    sending_contact:
+      title: Send to contact
+      description: Highlight the process for sending a payment to a contact
+      crop:
+      - 329.2265625
+      - 259.71875
+      - 1129.484375
+      - 752.66015625
+      coordinates:
+        send:
+        - 422
+        - 485
+        send_payto:
+        - 701
+        - 407
+        label:
+        - 678
+        - 445
+        amount:
+        - 698
+        - 488
+        create_transaction:
+        - 1331
+        - 932
+        fee_range:
+        - 691
+        - 588
+        fee:
+        - 675
+        - 683
+        finalize_transaction:
+        - 978
+        - 854
+        sign_transaction:
+        - 1317
+        - 849
+        broadcast_transaction:
+        - 1300
+        - 851
+      steps:
+      - name: Activate window
+        description: null
+        action: click
+        clicks: 2
+        target: send
+        omit_from_output: true
+      - name: Enter "Pay to"
+        description: null
+        action: clickthentype
+        value: macgyver@spmac.xyz
+        target: send_payto
+        omit_from_output: true
+      - name: Enter amount
+        description: null
+        action: clickthentype
+        target: amount
+        value: '2000'
+        omit_from_output: true
+      - name: Select fee rate
+        description: null
+        action: click
+        target: fee_range
+        omit_from_output: true
+      - name: Enter Recipient Information
+        description: 'Enter Human-readable Contact as "Pay to"
+
+          Enter "Amount"
+
+          Select "Send Transaction" to view details
+
+          '
+        notes: '"Label" will be automatically populated but can be overridden '
+        action: click
+        target: create_transaction
+        screenshot: true
+      - name: Finalize Transaction
+        description: '1. Hover over the "contact" in the transaction output to see the actual
+          silent payment address
+          
+          2. Select "contact" in Outputs to view the silent payment address
+          '
+        notes: '"Pay to" displays the "contact"'
+        action: click
+        target: finalize_transaction
+        screenshot: true
+        annotations:
+        - type: text
+          label: "2"
+          position:
+          - 40
+          - 170
+        - type: highlight
+          region:
+          - 54
+          - 165
+          - 118
+          - 25
+        - type: text
+          label: "1"
+          position:
+          - 845
+          - 230
+        - type: highlight
+          region:
+          - 861
+          - 225
+          - 135
+          - 37
+      - name: Sign Transaction
+        description:
+        action: click
+        target: sign_transaction
+        screenshot: true
+      - name: Broadcast Transaction
+        description:
+        action: screenshot
+        screenshot: true
+  troubleshooting: '### Screenshots Don''t Match
+
+    - Sparrow version 2.3.0+ required
+
+
+    ### Sync Issues
+
+    - Verify your internet connection
+
+    - Check firewall settings
+
+    - Allow sufficient time for blockchain synchronization
+
+    '
+build:
+  source_url: "https://github.com/sparrowwallet/sparrow"

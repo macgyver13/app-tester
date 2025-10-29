@@ -2,37 +2,24 @@
 
 > **Last Updated:** {{ generated_date }}
 
-This repository contains automated documentation for {{ total_wallets }} Bitcoin wallet applications.
+This repository contains automated documentation for {{ total_wallets }} Silent Payment wallet applications.
 
 ---
 
 ## Available Wallets
 
 {% for wallet in wallets %}
-### {{ wallet.name }}
-[User Guide]({{ wallet.doc_path }})
+### {{ wallet.name }} [User Guide]({{ wallet.doc_path }})
 
 **Version:** {{ wallet.version }}  
 **Platform:** {{ wallet.platform }}  
 **Last Updated:** {{ wallet.generated_date }}
 
-
-
-{% if wallet.description %}
-{{ wallet.description }}
-{% endif %}
-
 ---
 
 {% endfor %}
 
-## How to Use This Documentation
-
-1. Select the wallet you want to learn about
-2. Follow the step-by-step guide with screenshots
-3. Refer to troubleshooting sections if needed
-
 ---
 
-**Maintained by:** Bitcoin Wallet Documentation Team  
+**Maintained by:** Silent Payment Documentation Team  
 

@@ -1,0 +1,248 @@
+{
+  "title": "Sparrow User Guide",
+  "wallet_name": "Sparrow",
+  "description": "Step-by-step guide to setting up and using Sparrow wallet with silent payments",
+  "generated_date": "2025-10-29",
+  "steps": [
+    {
+      "number": 2,
+      "name": "Create New Wallet",
+      "description": "Create a new wallet using this [guide](https://www.sparrowwallet.com/docs/quick-start.html#creating-your-first-wallet)\nPolicy Type: \"Single Signature\"\nScript Type: \"Taproot (P2TR)\"\nDerivation: m/86'/0'/0'\n",
+      "section": "setup",
+      "flags": [],
+      "notes": "Type: \"Software Wallet\" required at this time to send silent payments",
+      "screenshot": "output/staging/sparrow/screenshots/setup_create_new_wallet_annotated.png",
+      "screenshot_relative": "screenshots/setup_create_new_wallet_annotated.png"
+    },
+    {
+      "number": 4,
+      "name": "Transactions",
+      "description": "View wallet balance and transaction history",
+      "section": "overview",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/overview_transactions.png",
+      "screenshot_relative": "screenshots/overview_transactions.png"
+    },
+    {
+      "number": 5,
+      "name": "Send",
+      "description": "Send bitcoin to other wallets",
+      "section": "overview",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/overview_send.png",
+      "screenshot_relative": "screenshots/overview_send.png"
+    },
+    {
+      "number": 11,
+      "name": "Enter Recipient Information",
+      "description": "Enter \"Pay to\"\nEnter \"Label\"\nEnter \"Amount\"\nSelect \"Send Transaction\" to view details\n",
+      "section": "sending",
+      "flags": [],
+      "notes": "Human Readable Names (HRN) or silent payment addresses are supported\n",
+      "screenshot": "output/staging/sparrow/screenshots/sending_enter_recipient_information.png",
+      "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
+    },
+    {
+      "number": 12,
+      "name": "Finalize Transaction",
+      "description": null,
+      "section": "sending",
+      "flags": [],
+      "notes": "\"Pay to\" displays the silent payment address",
+      "screenshot": "output/staging/sparrow/screenshots/sending_finalize_transaction.png",
+      "screenshot_relative": "screenshots/sending_finalize_transaction.png"
+    },
+    {
+      "number": 13,
+      "name": "Sign Transaction",
+      "description": null,
+      "section": "sending",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/sending_sign_transaction.png",
+      "screenshot_relative": "screenshots/sending_sign_transaction.png"
+    },
+    {
+      "number": 14,
+      "name": "Broadcast Transaction",
+      "description": null,
+      "section": "sending",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/sending_broadcast_transaction.png",
+      "screenshot_relative": "screenshots/sending_broadcast_transaction.png"
+    },
+    {
+      "number": 19,
+      "name": "Enter Recipient Information",
+      "description": "Enter Human-readable Contact as \"Pay to\"\nEnter \"Amount\"\nSelect \"Send Transaction\" to view details\n",
+      "section": "sending_contact",
+      "flags": [],
+      "notes": "\"Label\" will be automatically populated but can be overridden ",
+      "screenshot": "output/staging/sparrow/screenshots/sending_contact_enter_recipient_information.png",
+      "screenshot_relative": "screenshots/sending_contact_enter_recipient_information.png"
+    },
+    {
+      "number": 20,
+      "name": "Finalize Transaction",
+      "description": "1. Hover over the \"contact\" in the transaction output to see the actual silent payment address\n2. Select \"contact\" in Outputs to view the silent payment address ",
+      "section": "sending_contact",
+      "flags": [],
+      "notes": "\"Pay to\" displays the \"contact\"",
+      "screenshot": "output/staging/sparrow/screenshots/sending_contact_finalize_transaction_annotated.png",
+      "screenshot_relative": "screenshots/sending_contact_finalize_transaction_annotated.png"
+    },
+    {
+      "number": 21,
+      "name": "Sign Transaction",
+      "description": null,
+      "section": "sending_contact",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/sending_contact_sign_transaction.png",
+      "screenshot_relative": "screenshots/sending_contact_sign_transaction.png"
+    },
+    {
+      "number": 22,
+      "name": "Broadcast Transaction",
+      "description": null,
+      "section": "sending_contact",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/sparrow/screenshots/sending_contact_broadcast_transaction.png",
+      "screenshot_relative": "screenshots/sending_contact_broadcast_transaction.png"
+    }
+  ],
+  "sections": {
+    "setup": [
+      {
+        "number": 2,
+        "name": "Create New Wallet",
+        "description": "Create a new wallet using this [guide](https://www.sparrowwallet.com/docs/quick-start.html#creating-your-first-wallet)\nPolicy Type: \"Single Signature\"\nScript Type: \"Taproot (P2TR)\"\nDerivation: m/86'/0'/0'\n",
+        "section": "setup",
+        "flags": [],
+        "notes": "Type: \"Software Wallet\" required at this time to send silent payments",
+        "screenshot": "output/staging/sparrow/screenshots/setup_create_new_wallet_annotated.png",
+        "screenshot_relative": "screenshots/setup_create_new_wallet_annotated.png"
+      }
+    ],
+    "overview": [
+      {
+        "number": 4,
+        "name": "Transactions",
+        "description": "View wallet balance and transaction history",
+        "section": "overview",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/overview_transactions.png",
+        "screenshot_relative": "screenshots/overview_transactions.png"
+      },
+      {
+        "number": 5,
+        "name": "Send",
+        "description": "Send bitcoin to other wallets",
+        "section": "overview",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/overview_send.png",
+        "screenshot_relative": "screenshots/overview_send.png"
+      }
+    ],
+    "sending": [
+      {
+        "number": 11,
+        "name": "Enter Recipient Information",
+        "description": "Enter \"Pay to\"\nEnter \"Label\"\nEnter \"Amount\"\nSelect \"Send Transaction\" to view details\n",
+        "section": "sending",
+        "flags": [],
+        "notes": "Human Readable Names (HRN) or silent payment addresses are supported\n",
+        "screenshot": "output/staging/sparrow/screenshots/sending_enter_recipient_information.png",
+        "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
+      },
+      {
+        "number": 12,
+        "name": "Finalize Transaction",
+        "description": null,
+        "section": "sending",
+        "flags": [],
+        "notes": "\"Pay to\" displays the silent payment address",
+        "screenshot": "output/staging/sparrow/screenshots/sending_finalize_transaction.png",
+        "screenshot_relative": "screenshots/sending_finalize_transaction.png"
+      },
+      {
+        "number": 13,
+        "name": "Sign Transaction",
+        "description": null,
+        "section": "sending",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/sending_sign_transaction.png",
+        "screenshot_relative": "screenshots/sending_sign_transaction.png"
+      },
+      {
+        "number": 14,
+        "name": "Broadcast Transaction",
+        "description": null,
+        "section": "sending",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/sending_broadcast_transaction.png",
+        "screenshot_relative": "screenshots/sending_broadcast_transaction.png"
+      }
+    ],
+    "sending_contact": [
+      {
+        "number": 19,
+        "name": "Enter Recipient Information",
+        "description": "Enter Human-readable Contact as \"Pay to\"\nEnter \"Amount\"\nSelect \"Send Transaction\" to view details\n",
+        "section": "sending_contact",
+        "flags": [],
+        "notes": "\"Label\" will be automatically populated but can be overridden ",
+        "screenshot": "output/staging/sparrow/screenshots/sending_contact_enter_recipient_information.png",
+        "screenshot_relative": "screenshots/sending_contact_enter_recipient_information.png"
+      },
+      {
+        "number": 20,
+        "name": "Finalize Transaction",
+        "description": "1. Hover over the \"contact\" in the transaction output to see the actual silent payment address\n2. Select \"contact\" in Outputs to view the silent payment address ",
+        "section": "sending_contact",
+        "flags": [],
+        "notes": "\"Pay to\" displays the \"contact\"",
+        "screenshot": "output/staging/sparrow/screenshots/sending_contact_finalize_transaction_annotated.png",
+        "screenshot_relative": "screenshots/sending_contact_finalize_transaction_annotated.png"
+      },
+      {
+        "number": 21,
+        "name": "Sign Transaction",
+        "description": null,
+        "section": "sending_contact",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/sending_contact_sign_transaction.png",
+        "screenshot_relative": "screenshots/sending_contact_sign_transaction.png"
+      },
+      {
+        "number": 22,
+        "name": "Broadcast Transaction",
+        "description": null,
+        "section": "sending_contact",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/sparrow/screenshots/sending_contact_broadcast_transaction.png",
+        "screenshot_relative": "screenshots/sending_contact_broadcast_transaction.png"
+      }
+    ]
+  },
+  "has_sections": true,
+  "total_steps": 11,
+  "new_features": [],
+  "changed_features": [],
+  "has_new_features": false,
+  "has_changed_features": false,
+  "source_url": "https://github.com/sparrowwallet/sparrow",
+  "build_instructions": "",
+  "screenshot_max_height": 500,
+  "troubleshooting": "### Screenshots Don't Match\n- Sparrow version 2.3.0+ required\n\n### Sync Issues\n- Verify your internet connection\n- Check firewall settings\n- Allow sufficient time for blockchain synchronization\n"
+}
