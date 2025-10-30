@@ -2,7 +2,7 @@
 
 > **Last Updated:** {{ generated_date }}
 
-This repository contains automated documentation for {{ total_wallets }} Silent Payment wallet applications.
+This repository contains automated documentation for {{ total_wallets }} Silent Payment applications.
 
 ---
 
@@ -11,9 +11,11 @@ This repository contains automated documentation for {{ total_wallets }} Silent 
 {% for wallet in wallets %}
 ### {{ wallet.name }} [User Guide]({{ wallet.doc_path }})
 
-**Version:** {{ wallet.version }}  
-**Platform:** {{ wallet.platform }}  
-**Last Updated:** {{ wallet.generated_date }}
+{% if wallet.version %}**Version:** {{ wallet.version }}
+
+{% endif %}**Platform:** {{ wallet.platform }}
+
+**Last Updated:** {{ wallet.last_updated }}
 
 ---
 

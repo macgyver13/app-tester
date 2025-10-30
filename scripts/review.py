@@ -146,32 +146,53 @@ def regenerate_index(output_dir: Path):
             continue
 
         # Load wallet configuration
-        config_path = wallet_dir.parent.parent / "wallets" / wallet_dir.name / "config.yaml"
+        config_path = Path("wallets") / wallet_dir.name / "config.yaml"
         wallet_name = wallet_dir.name.replace("_", " ").title()
         description = f"Silent Payment user guide for {wallet_name}"
+        platform = ""
+        version = None
 
         if config_path.exists():
             try:
                 config = WalletConfig.from_yaml(str(config_path))
                 wallet_name = config.name
-                description = config.doc_description or description
+                description = config.description
+
+                # Extract platforms and format
+                if hasattr(config, 'platforms') and config.platforms:
+                    # Capitalize platform names (macos -> MacOS)
+                    platform_map = {
+                        'macos': 'MacOS',
+                        'windows': 'Windows',
+                        'linux': 'Linux',
+                        'ios': 'iOS',
+                        'android': 'Android'
+                    }
+                    formatted_platforms = [
+                        platform_map.get(p.lower(), p.title())
+                        for p in config.platforms
+                    ]
+                    platform = ", ".join(formatted_platforms)
+
+                # Extract version if it exists
+                version = config.version
+
             except Exception:
                 pass  # Use defaults if config fails to load
 
         # Load metadata if available
         metadata_file = wallet_dir / "metadata.json"
-        last_updated = "Unknown"
+        last_updated = datetime.now().strftime("%Y-%m-%d")
         total_steps = 0
 
         if metadata_file.exists():
             try:
                 with open(metadata_file, 'r') as f:
                     metadata = json.load(f)
-                    timestamp = metadata.get('timestamp', '')
-                    if timestamp:
-                        # Parse ISO format timestamp
-                        dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
-                        last_updated = dt.strftime('%Y-%m-%d')
+                    # Use generated_date from metadata (preferred)
+                    generated_date = metadata.get('generated_date', '')
+                    if generated_date:
+                        last_updated = generated_date
                     total_steps = metadata.get('total_steps', 0)
             except Exception:
                 pass  # Use defaults if metadata fails to load
@@ -182,6 +203,8 @@ def regenerate_index(output_dir: Path):
             "doc_path": f"{wallet_dir.name}/setup-guide.md" if (wallet_dir / "setup-guide.md").exists() else f"{wallet_dir.name}/user-guide.md",
             "last_updated": last_updated,
             "total_steps": total_steps,
+            "platform": platform,
+            "version": version,
         })
 
     if not wallets:

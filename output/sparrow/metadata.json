@@ -2,7 +2,7 @@
   "title": "Sparrow User Guide",
   "wallet_name": "Sparrow",
   "description": "Step-by-step guide to setting up and using Sparrow wallet with silent payments",
-  "generated_date": "2025-10-29",
+  "generated_date": "2025-10-30",
   "steps": [
     {
       "number": 2,
@@ -87,7 +87,7 @@
     {
       "number": 20,
       "name": "Finalize Transaction",
-      "description": "1. Hover over the \"contact\" in the transaction output to see the actual silent payment address\n2. Select \"contact\" in Outputs to view the silent payment address ",
+      "description": "(1) Hover over the \"contact\" in the transaction output to see the actual silent payment address\n(2) Select \"contact\" in Outputs to view the silent payment address ",
       "section": "sending_contact",
       "flags": [],
       "notes": "\"Pay to\" displays the \"contact\"",
@@ -206,7 +206,7 @@
       {
         "number": 20,
         "name": "Finalize Transaction",
-        "description": "1. Hover over the \"contact\" in the transaction output to see the actual silent payment address\n2. Select \"contact\" in Outputs to view the silent payment address ",
+        "description": "(1) Hover over the \"contact\" in the transaction output to see the actual silent payment address\n(2) Select \"contact\" in Outputs to view the silent payment address ",
         "section": "sending_contact",
         "flags": [],
         "notes": "\"Pay to\" displays the \"contact\"",

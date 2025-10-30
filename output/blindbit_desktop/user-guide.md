@@ -1,6 +1,6 @@
 # BlindBit Desktop User Guide
 
-> **Last Updated:** 2025-10-29
+> **Last Updated:** 2025-10-30
 
 Step-by-step guide to setting up and using BlindBit Desktop wallet
 
@@ -207,7 +207,7 @@ Highlight the basics of sending a payment from blindbit-desktop
 
 
 **Note:**
-> Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time
+> Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses
 > 
 > Fee rate will be increased to spend remaining UTXO to avoid dust
 > 

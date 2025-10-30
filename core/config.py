@@ -27,6 +27,7 @@ class WalletConfig:
     wallet_type: str = "desktop"
     platforms: list = field(default_factory=lambda: ["macos"])
     app_paths: Dict[str, str] = field(default_factory=dict)
+    version: Optional[str] = None
 
     # Automation settings
     startup_wait: int = 3
@@ -115,6 +116,7 @@ class WalletConfig:
             wallet_type=wallet_data.get('type', 'desktop'),
             platforms=wallet_data.get('platforms', ['macOS']),
             app_paths=wallet_data.get('app_path', {}),
+            version=wallet_data.get('version'),
             startup_wait=automation_data.get('startup_wait', 3),
             screenshot_delay=automation_data.get('screenshot_delay', 1.0),
             implicit_wait=automation_data.get('implicit_wait', 10),

@@ -2,7 +2,7 @@
   "title": "BlindBit Desktop User Guide",
   "wallet_name": "BlindBit Desktop",
   "description": "Step-by-step guide to setting up and using BlindBit Desktop wallet",
-  "generated_date": "2025-10-29",
+  "generated_date": "2025-10-30",
   "steps": [
     {
       "number": 2,
@@ -120,7 +120,7 @@
       "description": "Enter a recipient address, the amount to send, fee rate\nSelect \"Send Transaction\" to view details\n",
       "section": "sending",
       "flags": [],
-      "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
+      "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
       "screenshot": "output/staging/blindbit_desktop/screenshots/sending_enter_recipient_information.png",
       "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
     },
@@ -307,7 +307,7 @@
         "description": "Enter a recipient address, the amount to send, fee rate\nSelect \"Send Transaction\" to view details\n",
         "section": "sending",
         "flags": [],
-        "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
+        "notes": "Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses\n\nFee rate will be increased to spend remaining UTXO to avoid dust\n",
         "screenshot": "output/staging/blindbit_desktop/screenshots/sending_enter_recipient_information.png",
         "screenshot_relative": "screenshots/sending_enter_recipient_information.png"
       },

@@ -1,6 +1,6 @@
 # Sparrow User Guide
 
-> **Last Updated:** 2025-10-29
+> **Last Updated:** 2025-10-30
 
 Step-by-step guide to setting up and using Sparrow wallet with silent payments
 
@@ -10,7 +10,7 @@ Step-by-step guide to setting up and using Sparrow wallet with silent payments
 
 - [Initial Wallet Setup](#initial-wallet-setup)
 - [Using Sparrow](#using-sparrow)
-- [Sending Transactions](#sending-transactions)
+- [Send to address](#send-to-address)
 - [Send to contact](#send-to-contact)
 - [Troubleshooting](#troubleshooting)
 
@@ -67,7 +67,7 @@ Send bitcoin to other wallets
 
 
  ***
-## Sending Transactions
+## Send to address
 
 Highlight the process for sending a payment to a silent payment address
 

@@ -3,8 +3,7 @@ wallet:
   type: "desktop"
   platforms:
     - "macos"
-  # app_path:
-    #macos: "/Users/ron/src/blindbit-desktop/blindbit-desktop"
+  version: alpha
 
 automation:
   startup_wait: 5
@@ -209,7 +208,7 @@ documentation:
             Enter a recipient address, the amount to send, fee rate
             Select "Send Transaction" to view details
           notes: |
-            Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time
+            Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses
 
             Fee rate will be increased to spend remaining UTXO to avoid dust
           action: click

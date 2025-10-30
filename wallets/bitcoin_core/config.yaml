@@ -1,0 +1,276 @@
+wallet:
+  name: Bitcoin Core
+  type: desktop
+  platforms:
+  - macOS
+  version: alpha
+automation:
+  startup_wait: 5
+  screenshot_delay: 1.0
+  implicit_wait: 10
+  display_scale: 2.0
+documentation:
+  title: Bitcoin Core Wallet User Guide
+  description: Setup Bitcoin Core Wallet for Silent Payments
+  output_format: markdown
+  embed_images: true
+  screenshot_max_height: 500
+  troubleshooting: '### Common Issues
+
+
+    **Wallet won''t start:**
+
+    - Check that you have the required dependencies installed
+
+    - Verify the application path is correct
+
+
+    **Screenshots don''t match:**
+
+    - Ensure you''re using the correct version
+
+    - Check that you compiled from the correct branch
+
+    '
+  sections:
+    build:
+      title: Building from Source
+      description: 'Instructions for compiling Example Wallet from [source](https://github.com/example/wallet)
+
+        '
+      steps: []
+    setup:
+      title: Initial Wallet Setup
+      description: Create and configure your wallet for silent payments
+      steps:
+      - name: Create New Wallet
+        description: 'Enter "Wallet Name"
+
+          Check "Make Silent Payments Wallet"
+
+          Select "Create" button '
+        action: screenshot
+        screenshot: true
+      crop:
+      - 638.6484375
+      - 411.84765625
+      - 479.2421875
+      - 356.37109375
+    usage:
+      title: Wallet Overview
+      description: 
+      coordinates:
+        receive_button:
+        - 637.33203125
+        - 348.4609375
+        send_button:
+        - 553.53125
+        - 344.453125
+        settings_button:
+        - 600
+        - 300
+        overview_button:
+        - 466.63671875
+        - 340.1484375
+        transactions:
+        - 744.57421875
+        - 342.66796875
+      steps:
+      - name: Load Overview
+        description: null
+        action: click
+        target: overview_button
+        omit_from_output: true
+      - name: Overview
+        description: Main screen showing balance and recent transactions
+        action: click
+        target: send_button
+        screenshot: true
+      - name: Send
+        description: Send bitcoin to other wallets
+        action: click
+        target: receive_button
+        screenshot: true
+      - name: Receive
+        description: 'Copy silent payments address to share with others
+
+          Go to [Receiving Silent Payments](#receiving-silent-payments) for more details '
+        notes: Only one address is required, each transaction will have a unique on
+          chain taproot address
+        action: click
+        target: transactions
+        screenshot: true
+      - name: Transactions
+        description: View transaction history
+        notes: transactions will appear as soon as they are broadcast to the network
+        action: screenshot
+        screenshot: true
+      crop:
+      - 375.9921875
+      - 287.48046875
+      - 1060.76953125
+      - 736.3359375
+    sending:
+      title: Sending Silent Payments
+      description:
+      crop:
+      - 366.625
+      - 283.4453125
+      - 1070.33984375
+      - 739.0078125
+      coordinates:
+        send_button:
+        - 553.53125
+        - 344.453125
+        enter_recipient_information:
+        - 562.328125
+        - 528.24609375
+        send_payto:
+        - 584.41015625
+        - 527.71484375
+        amount:
+        - 622.62890625
+        - 602.234375
+        send_transaction:
+        - 497.6640625
+        - 952.75
+        confirm_transaction:
+        - 1360.3359375
+        - 719.72265625
+      steps:
+      - name: Activate window
+        description: null
+        action: click
+        clicks: 2
+        target: send_button
+        omit_from_output: true
+      - name: Enter "Pay to"
+        description: null
+        action: clickthentype
+        value: sp1qqfnhjuj38wczsuvcr0hqnsm3trl4jqcz6zw4q362lqejxkqkmuhjwqegcmprav88207355ds4s9lu58lg2stfmd6ghvall8hy9n939dltsf9kcvj
+        target: send_payto
+        omit_from_output: true
+      - name: Enter amount
+        description: null
+        action: clickthentype
+        target: amount
+        value: '1700'
+        omit_from_output: true
+      - name: Enter Recipient Information
+        description: 'Enter "Pay To"
+
+          Enter "Amount"
+
+          Select "Send" '
+        notes: Currently Bitcoin Core does not support Human Readable Names (HRN)
+          addresses
+        action: click
+        target: send_transaction
+        screenshot: true
+        annotations:
+        - type: blur
+          region:
+          - 1277
+          - 328
+          - 158
+          - 22
+      - name: Confirm Transaction
+        description: 'Review recipient information 
+          
+          Select "Send" to broadcast transaction'
+        action: screenshot
+        screenshot: true
+    receiving:
+      title: Receiving Silent Payments
+      description:
+      crop:
+      - 361.28125
+      - 276.34765625
+      - 1083.4453125
+      - 757.890625
+      coordinates:
+        receiving_addresses:
+        - 613.82421875
+        - 467.06640625
+        receive:
+        - 622.5859375
+        - 338.078125
+        create_new_receiving_address:
+        - 594.6015625
+        - 546.0390625
+        copy_silent_payment_address:
+        - 1327.078125
+        - 888.703125
+      steps:
+      - name: Receive
+        description: There are 2 methods for finding the silent payment address in Bitcoin Core
+        action: click
+        target: receive
+        screenshot: true
+      - name: Make Silent Payment Request
+        description: '(1) Choose "Silent Payment" in address type dropdown
+
+          Select "Create new receiving address" to generate requested silent payment
+          history address '
+        notes: Once the silent payment entry is added to the list you can double-click the
+          entry to re-open the view
+        action: click
+        target: create_new_receiving_address
+        screenshot: true
+        annotations:
+        - type: text
+          position:
+          - 575
+          - 190
+          label: '1'
+      - name: Copy Silent Payment Address
+        description: Select "Copy Address" to copy to clipboard
+        action: click
+        target: copy_silent_payment_address
+        screenshot: true
+      - name: Find Silent Payment in Receiving Addresses
+        description: 'Select "Window" in application menu
+        
+          Select "Receiving addresses" from menu
+
+          Search for "sp" in the search field
+
+          Select the address with "sp1q" prefix from the Address list
+
+          Select "Copy"
+          '
+        action: information
+        screenshot: false
+build:
+  source_url: https://github.com/Eunovo/bitcoin/tree/2025-implement-bip352-receiving
+  build_instructions: '### Prerequisites
+
+    - Xcode Command Line Tools
+
+    - Qt6 - `brew install qt`
+
+
+    ### Build Steps (Simplified) - Detailed [MacOS Reference](https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md)
+
+    ```bash 
+    
+    export QTDIR=/usr/local/opt/qt
+
+    git clone https://github.com/Eunovo/bitcoin
+
+    cd bitcoin
+
+    git checkout -B 2025-implement-bip352-receiving origin/2025-implement-bip352-receiving
+
+    cmake -B build -DBUILD_GUI=ON
+
+    cmake --build build -j 10 --target deploy
+
+    # You will need a synchronized full node to continue
+
+    ./build/dist/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/<user>/data/bitcoin
+    -conf=/Users/<user>/.bitcoin/bitcoin.conf -server
+
+    ```
+
+    '

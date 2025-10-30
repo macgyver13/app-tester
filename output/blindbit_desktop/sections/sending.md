@@ -12,7 +12,7 @@ Highlight the basics of sending a payment from blindbit-desktop
 
 
 **Note:**
-> Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses at this time
+> Currently blindbit-desktop does not support coin selection or Human Readable Names (HRN) addresses
 > 
 > Fee rate will be increased to spend remaining UTXO to avoid dust
 > 

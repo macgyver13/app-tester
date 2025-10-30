@@ -3,6 +3,7 @@ wallet:
   type: desktop
   platforms:
   - macos
+  version: 2.3.0
 automation:
   startup_wait: 2
   screenshot_delay: 1.0
@@ -104,7 +105,7 @@ documentation:
         target: settings
         screenshot: true
     sending:
-      title: Sending Transactions
+      title: Send to address
       description: Highlight the process for sending a payment to a silent payment
         address
       crop:
@@ -280,10 +281,10 @@ documentation:
         target: create_transaction
         screenshot: true
       - name: Finalize Transaction
-        description: '1. Hover over the "contact" in the transaction output to see the actual
+        description: '(1) Hover over the "contact" in the transaction output to see the actual
           silent payment address
           
-          2. Select "contact" in Outputs to view the silent payment address
+          (2) Select "contact" in Outputs to view the silent payment address
           '
         notes: '"Pay to" displays the "contact"'
         action: click

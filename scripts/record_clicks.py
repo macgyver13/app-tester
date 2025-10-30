@@ -355,7 +355,7 @@ class ConfigEditor:
 class InteractiveConfigEditor:
     """Interactive mode for editing config with mouse clicks"""
 
-    def __init__(self, config_path, display_scale=None, show_overlay=False):
+    def __init__(self, config_path, display_scale=None, show_overlay=True):
         self.editor = ConfigEditor(config_path)
         self.listener = None
         self.mode = None  # 'blur', 'coordinate', 'crop'
@@ -404,6 +404,8 @@ class InteractiveConfigEditor:
                     self.quit_app()
                 elif choice == 's':
                     self.editor.save_config()
+                elif choice == 'n':
+                    self.create_new_section()
                 elif choice.isdigit():
                     section_idx = int(choice) - 1
                     sections = self.editor.get_sections()
@@ -428,10 +430,60 @@ class InteractiveConfigEditor:
             print(f"  {i}. {section}")
 
         print("\nOptions:")
+        print("  n - Create new section")
         print("  s - Save changes")
         print("  q - Quit")
 
         return input("\nChoice: ").strip().lower()
+
+    def create_new_section(self):
+        """Create a new empty section"""
+        print("\n" + "="*70)
+        print("Create New Section")
+        print("="*70)
+        
+        # Prompt for section ID (key in YAML)
+        section_id = input("Enter section ID (e.g., 'setup', 'sending'): ").strip()
+        if not section_id:
+            print("✗ Section ID is required")
+            return
+        
+        # Check if section already exists
+        if section_id in self.editor.get_sections():
+            print(f"✗ Section '{section_id}' already exists")
+            return
+        
+        # Prompt for title
+        title = input("Enter section title: ").strip()
+        if not title:
+            title = section_id.replace('_', ' ').title()
+        
+        # Prompt for description
+        description = input("Enter section description (optional): ").strip()
+        if not description:
+            description = f"Description for {title}"
+        
+        # Create empty section
+        new_section = {
+            'title': title,
+            'description': description,
+            'crop': [],
+            'coordinates': {},
+            'steps': []
+        }
+        
+        # Add to config
+        if 'sections' not in self.editor.config['documentation']:
+            self.editor.config['documentation']['sections'] = {}
+        
+        self.editor.config['documentation']['sections'][section_id] = new_section
+        self.editor.modified = True
+        
+        print(f"\n✓ Created new section: {section_id}")
+        print("  Next steps:")
+        print("  1. Select the section from the main menu")
+        print("  2. Set crop region (r)")
+        print("  3. Add steps (n)")
 
     def section_menu(self):
         """Menu for section-level actions"""
@@ -571,7 +623,32 @@ class InteractiveConfigEditor:
 
         # Get the target coordinate name
         target = step.get('target')
-        if not target:
+        
+        # If step is screenshot-only, convert it to a click action
+        if not target and step.get('action') == 'screenshot':
+            print("\n" + "="*70)
+            print("Convert Screenshot Step to Click Action")
+            print("="*70)
+            print(f"Current step: {step.get('name', 'Unnamed')}")
+            print("This is a screenshot-only step. Converting to click action.")
+            print()
+            
+            # Prompt for coordinate name
+            coord_name = input("Enter coordinate name (e.g., 'send_button'): ").strip()
+            if not coord_name:
+                print("✗ Coordinate name is required")
+                return
+            
+            # Convert action to click
+            step['action'] = 'click'
+            step['target'] = coord_name
+            self.editor.modified = True
+            
+            print(f"✓ Converted to click action with target '{coord_name}'")
+            print("Now click on the target location...")
+            
+            target = coord_name
+        elif not target:
             print("\n✗ Step has no target coordinate")
             return
 
@@ -1239,20 +1316,19 @@ if __name__ == "__main__":
                         help='Crop region as "x,y,width,height" (e.g., "100,100,800,600")')
     parser.add_argument('--interactive', action='store_true',
                         help='Prompt for coordinate names after each click')
-    parser.add_argument('--edit-config', type=str, metavar='PATH',
+    parser.add_argument('--config', type=str, metavar='PATH',
                         help='Interactive mode: edit existing config.yaml to add/edit annotations and coordinates')
     parser.add_argument('--display-scale', type=float, default=None,
                         help='Display scale factor (overrides config, typically 2.0 for retina, 1.0 for non-retina)')
-    parser.add_argument('--show-overlay', action='store_true', default=False,
-                        help='Show red overlay window with crop region info (requires working OpenCV)')
+    parser.add_argument('--no-overlay', action='store_true', default=False,
+                        help='Disable the crop region overlay window (overlay is enabled by default)')
     args = parser.parse_args()
 
-    # Check if edit-config mode
-    if args.edit_config:
+    if args.config:
         try:
-            editor = InteractiveConfigEditor(args.edit_config, 
+            editor = InteractiveConfigEditor(args.config, 
                                             display_scale=args.display_scale,
-                                            show_overlay=args.show_overlay)
+                                            show_overlay=not args.no_overlay)
             editor.start()
         except Exception as e:
             print(f"Error: {e}")

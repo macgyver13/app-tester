@@ -1,0 +1,248 @@
+{
+  "title": "Bitcoin Core Wallet User Guide",
+  "wallet_name": "Bitcoin Core",
+  "description": "Bitcoin Core Wallet with Silent Payments Support",
+  "generated_date": "2025-10-30",
+  "steps": [
+    {
+      "number": 1,
+      "name": "Create New Wallet",
+      "description": "Enter \"Wallet Name\"\nCheck \"Make Silent Payments Wallet\"\nSelect \"Create\" button ",
+      "section": "setup",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/setup_create_new_wallet.png",
+      "screenshot_relative": "screenshots/setup_create_new_wallet.png"
+    },
+    {
+      "number": 3,
+      "name": "Overview",
+      "description": "Main screen showing balance and recent transactions",
+      "section": "usage",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/usage_overview.png",
+      "screenshot_relative": "screenshots/usage_overview.png"
+    },
+    {
+      "number": 4,
+      "name": "Send",
+      "description": "Send bitcoin to other wallets",
+      "section": "usage",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/usage_send.png",
+      "screenshot_relative": "screenshots/usage_send.png"
+    },
+    {
+      "number": 5,
+      "name": "Receive",
+      "description": "Copy silent payments address to share with others\nGo to [Receiving Silent Payments](#receiving-silent-payments) for more details ",
+      "section": "usage",
+      "flags": [],
+      "notes": "Only one address is required, each transaction will have a unique on chain taproot address",
+      "screenshot": "output/staging/bitcoin_core/screenshots/usage_receive.png",
+      "screenshot_relative": "screenshots/usage_receive.png"
+    },
+    {
+      "number": 6,
+      "name": "Transactions",
+      "description": "View transaction history",
+      "section": "usage",
+      "flags": [],
+      "notes": "transactions will appear as soon as they are broadcast to the network",
+      "screenshot": "output/staging/bitcoin_core/screenshots/usage_transactions.png",
+      "screenshot_relative": "screenshots/usage_transactions.png"
+    },
+    {
+      "number": 10,
+      "name": "Enter Recipient Information",
+      "description": "Enter \"Pay To\"\nEnter \"Amount\"\nSelect \"Send\" ",
+      "section": "sending",
+      "flags": [],
+      "notes": "Currently Bitcoin Core does not support Human Readable Names (HRN) addresses",
+      "screenshot": "output/staging/bitcoin_core/screenshots/sending_enter_recipient_information_annotated.png",
+      "screenshot_relative": "screenshots/sending_enter_recipient_information_annotated.png"
+    },
+    {
+      "number": 11,
+      "name": "Confirm Transaction",
+      "description": "Review recipient information\nSelect \"Send\" to broadcast transaction",
+      "section": "sending",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/sending_confirm_transaction.png",
+      "screenshot_relative": "screenshots/sending_confirm_transaction.png"
+    },
+    {
+      "number": 12,
+      "name": "Receive",
+      "description": "There are 2 methods for finding the silent payment address in Bitcoin Core",
+      "section": "receiving",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/receiving_receive.png",
+      "screenshot_relative": "screenshots/receiving_receive.png"
+    },
+    {
+      "number": 13,
+      "name": "Make Silent Payment Request",
+      "description": "(1) Choose \"Silent Payment\" in address type dropdown\nSelect \"Create new receiving address\" to generate requested silent payment history address ",
+      "section": "receiving",
+      "flags": [],
+      "notes": "Once the silent payment entry is added to the list you can double-click the entry to re-open the view",
+      "screenshot": "output/staging/bitcoin_core/screenshots/receiving_make_silent_payment_request_annotated.png",
+      "screenshot_relative": "screenshots/receiving_make_silent_payment_request_annotated.png"
+    },
+    {
+      "number": 14,
+      "name": "Copy Silent Payment Address",
+      "description": "Select \"Copy Address\" to copy to clipboard",
+      "section": "receiving",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/receiving_copy_silent_payment_address.png",
+      "screenshot_relative": "screenshots/receiving_copy_silent_payment_address.png"
+    },
+    {
+      "number": 15,
+      "name": "Find Silent Payment in Receiving Addresses",
+      "description": "Select \"Window\" in application menu\nSelect \"Receiving addresses\" from menu\nSearch for \"sp\" in the search field\nSelect the address with \"sp1q\" prefix from the Address list\nSelect \"Copy\" ",
+      "section": "receiving",
+      "flags": [],
+      "notes": "",
+      "screenshot": "output/staging/bitcoin_core/screenshots/receiving_find_silent_payment_in_receiving_addresses.png",
+      "screenshot_relative": "screenshots/receiving_find_silent_payment_in_receiving_addresses.png"
+    }
+  ],
+  "sections": {
+    "setup": [
+      {
+        "number": 1,
+        "name": "Create New Wallet",
+        "description": "Enter \"Wallet Name\"\nCheck \"Make Silent Payments Wallet\"\nSelect \"Create\" button ",
+        "section": "setup",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/setup_create_new_wallet.png",
+        "screenshot_relative": "screenshots/setup_create_new_wallet.png"
+      }
+    ],
+    "usage": [
+      {
+        "number": 3,
+        "name": "Overview",
+        "description": "Main screen showing balance and recent transactions",
+        "section": "usage",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/usage_overview.png",
+        "screenshot_relative": "screenshots/usage_overview.png"
+      },
+      {
+        "number": 4,
+        "name": "Send",
+        "description": "Send bitcoin to other wallets",
+        "section": "usage",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/usage_send.png",
+        "screenshot_relative": "screenshots/usage_send.png"
+      },
+      {
+        "number": 5,
+        "name": "Receive",
+        "description": "Copy silent payments address to share with others\nGo to [Receiving Silent Payments](#receiving-silent-payments) for more details ",
+        "section": "usage",
+        "flags": [],
+        "notes": "Only one address is required, each transaction will have a unique on chain taproot address",
+        "screenshot": "output/staging/bitcoin_core/screenshots/usage_receive.png",
+        "screenshot_relative": "screenshots/usage_receive.png"
+      },
+      {
+        "number": 6,
+        "name": "Transactions",
+        "description": "View transaction history",
+        "section": "usage",
+        "flags": [],
+        "notes": "transactions will appear as soon as they are broadcast to the network",
+        "screenshot": "output/staging/bitcoin_core/screenshots/usage_transactions.png",
+        "screenshot_relative": "screenshots/usage_transactions.png"
+      }
+    ],
+    "sending": [
+      {
+        "number": 10,
+        "name": "Enter Recipient Information",
+        "description": "Enter \"Pay To\"\nEnter \"Amount\"\nSelect \"Send\" ",
+        "section": "sending",
+        "flags": [],
+        "notes": "Currently Bitcoin Core does not support Human Readable Names (HRN) addresses",
+        "screenshot": "output/staging/bitcoin_core/screenshots/sending_enter_recipient_information_annotated.png",
+        "screenshot_relative": "screenshots/sending_enter_recipient_information_annotated.png"
+      },
+      {
+        "number": 11,
+        "name": "Confirm Transaction",
+        "description": "Review recipient information\nSelect \"Send\" to broadcast transaction",
+        "section": "sending",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/sending_confirm_transaction.png",
+        "screenshot_relative": "screenshots/sending_confirm_transaction.png"
+      }
+    ],
+    "receiving": [
+      {
+        "number": 12,
+        "name": "Receive",
+        "description": "There are 2 methods for finding the silent payment address in Bitcoin Core",
+        "section": "receiving",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/receiving_receive.png",
+        "screenshot_relative": "screenshots/receiving_receive.png"
+      },
+      {
+        "number": 13,
+        "name": "Make Silent Payment Request",
+        "description": "(1) Choose \"Silent Payment\" in address type dropdown\nSelect \"Create new receiving address\" to generate requested silent payment history address ",
+        "section": "receiving",
+        "flags": [],
+        "notes": "Once the silent payment entry is added to the list you can double-click the entry to re-open the view",
+        "screenshot": "output/staging/bitcoin_core/screenshots/receiving_make_silent_payment_request_annotated.png",
+        "screenshot_relative": "screenshots/receiving_make_silent_payment_request_annotated.png"
+      },
+      {
+        "number": 14,
+        "name": "Copy Silent Payment Address",
+        "description": "Select \"Copy Address\" to copy to clipboard",
+        "section": "receiving",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/receiving_copy_silent_payment_address.png",
+        "screenshot_relative": "screenshots/receiving_copy_silent_payment_address.png"
+      },
+      {
+        "number": 15,
+        "name": "Find Silent Payment in Receiving Addresses",
+        "description": "Select \"Window\" in application menu\nSelect \"Receiving addresses\" from menu\nSearch for \"sp\" in the search field\nSelect the address with \"sp1q\" prefix from the Address list\nSelect \"Copy\" ",
+        "section": "receiving",
+        "flags": [],
+        "notes": "",
+        "screenshot": "output/staging/bitcoin_core/screenshots/receiving_find_silent_payment_in_receiving_addresses.png",
+        "screenshot_relative": "screenshots/receiving_find_silent_payment_in_receiving_addresses.png"
+      }
+    ]
+  },
+  "has_sections": true,
+  "total_steps": 11,
+  "new_features": [],
+  "changed_features": [],
+  "has_new_features": false,
+  "has_changed_features": false,
+  "source_url": "https://github.com/Eunovo/bitcoin/tree/2025-implement-bip352-receiving",
+  "build_instructions": "### Prerequisites\n- Xcode Command Line Tools\n- Qt6 - `brew install qt`\n\n### Build Steps (Simplified) - Detailed [MacOS Reference](https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md)\n```bash\nexport QTDIR=/usr/local/opt/qt\ngit clone https://github.com/Eunovo/bitcoin\ncd bitcoin\ngit checkout -B 2025-implement-bip352-receiving origin/2025-implement-bip352-receiving\ncmake -B build -DBUILD_GUI=ON\ncmake --build build -j 10 --target deploy\n# You will need a synchronized full node to continue\n./build/dist/Bitcoin-Qt.app/Contents/MacOS/Bitcoin-Qt -datadir=/Users/<user>/data/bitcoin -conf=/Users/<user>/.bitcoin/bitcoin.conf -server\n```\n",
+  "screenshot_max_height": 500,
+  "troubleshooting": "### Common Issues\n\n**Wallet won't start:**\n- Check that you have the required dependencies installed\n- Verify the application path is correct\n\n**Screenshots don't match:**\n- Ensure you're using the correct version\n- Check that you compiled from the correct branch\n"
+}

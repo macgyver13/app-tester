@@ -1,5 +1,5 @@
  ***
-## Sending Transactions
+## Send to address
 
 Highlight the process for sending a payment to a silent payment address
 
